@@ -426,11 +426,10 @@ MonoBehaviour:
   health: 0
   takenDamage: 0
   maxHealth: 0
-  state: 1
+  state: 5
   stoppingDistance: 0.25
-  bulletSpeed: 3
+  bulletSpeed: 5
   bulletPrefab: {fileID: -7109188048688935694, guid: c651d00a0805321409c2cf9bf46e2d84, type: 3}
-  healthCanvas: {fileID: 0}
 --- !u!114 &2021714399
 MonoBehaviour:
   m_ObjectHideFlags: 0
