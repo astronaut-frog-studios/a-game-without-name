@@ -7,16 +7,16 @@ using UnityEngine.Events;
 internal enum ShootEnemyState
 {
     WAITING,
-    SEARCHING,
-    RUNNING,
     WALKING,
-    PREPARING,
-    SHOOTING
+    RUNNING,
+    SHOOTING,
+    PREPARING_ATTACK,
+    SEARCHING_RANDOM_POS
 };
 
 public class ShootEnemy : EnemyBase
 {
-    [SerializeField] private ShootEnemyState state = ShootEnemyState.SEARCHING;
+    [SerializeField] private ShootEnemyState state = ShootEnemyState.SEARCHING_RANDOM_POS;
     [SerializeField] private float stoppingDistance = 0.25f;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private Bullet bulletPrefab;
@@ -48,7 +48,7 @@ public class ShootEnemy : EnemyBase
 
         if (!canDetectPlayer && state != ShootEnemyState.SHOOTING)
         {
-            if (state != ShootEnemyState.PREPARING)
+            if (state != ShootEnemyState.PREPARING_ATTACK)
             {
                 CheckWalkingState();
                 return;
@@ -75,7 +75,7 @@ public class ShootEnemy : EnemyBase
         }
 
         if (preparingAttack) return;
-        state = ShootEnemyState.PREPARING;
+        state = ShootEnemyState.PREPARING_ATTACK;
         StopEnemy();
 
         if (bullet || inCooldown) return;
@@ -100,13 +100,13 @@ public class ShootEnemy : EnemyBase
             return;
         }
 
-        if (state != ShootEnemyState.SEARCHING) return;
+        if (state != ShootEnemyState.SEARCHING_RANDOM_POS) return;
         WalkToRandomPos();
     }
 
     private void WalkToRandomPos()
     {
-        randomPosition = (Vector2) transform.position + Random.insideUnitCircle * (enemy.detectRange + 2);
+        randomPosition = (Vector2)transform.position + Random.insideUnitCircle * (enemy.detectRange + 2);
         rigidbody.velocity = GetDirection(randomPosition) * enemy.speed;
         // Debug.DrawLine(transform.position, randomPosition, Color.green, 5f);
         state = ShootEnemyState.WALKING;
@@ -128,12 +128,12 @@ public class ShootEnemy : EnemyBase
 
         Destroy(bullet.gameObject);
         PlayerEvents.OnDamageReceived(enemy.damage);
-        state = ShootEnemyState.PREPARING;
+        state = ShootEnemyState.PREPARING_ATTACK;
     }
 
     private Vector2 GetDirection(Vector2 targetPosition)
     {
-        var direction = targetPosition - (Vector2) transform.position;
+        var direction = targetPosition - (Vector2)transform.position;
         direction.Normalize();
 
         return direction;
@@ -151,14 +151,14 @@ public class ShootEnemy : EnemyBase
         StopEnemy();
         yield return new WaitForSeconds(2.5f);
         rigidbody.rotation = 0;
-        state = ShootEnemyState.SEARCHING;
+        state = ShootEnemyState.SEARCHING_RANDOM_POS;
     }
 
     private void StopEnemy() => rigidbody.velocity = Vector2.zero;
     private bool pathPending => Vector2.Distance(rigidbody.position, randomPosition) > stoppingDistance;
     private bool closerToPlayer => target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
     private bool inCooldown => attackCooldown > 0;
-    private bool preparingAttack => state is ShootEnemyState.PREPARING && inCooldown;
+    private bool preparingAttack => state is ShootEnemyState.PREPARING_ATTACK && inCooldown;
     private bool canCheckBulletCollision => state is ShootEnemyState.SHOOTING && bullet;
     private bool bulletHasCollide => bullet &&
                                      Physics2D.OverlapCircle(bullet.transform.position, 0.4f,
