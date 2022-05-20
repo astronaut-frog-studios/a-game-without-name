@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 7039043352559011745}
   - component: {fileID: 8963477011721200107}
   - component: {fileID: 6762139525184550360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lanterna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
