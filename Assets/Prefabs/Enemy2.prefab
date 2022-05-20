@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6d9eb065e5f234789210bc2ff07fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyOpacity: {fileID: 11400000, guid: f770a02634f7e71479b9823a43db5406, type: 2}
   enemy: {fileID: 11400000, guid: 3afa23870091ad644a9709a5343b8026, type: 2}
   health: 0
   takenDamage: 0

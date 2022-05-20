@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public abstract class EnemyBase : MonoBehaviour
 {
+    [SerializeField] private EnemyOpacityObject enemyOpacity;
     [SerializeField] protected EnemyObject enemy;
     [ReadOnly, SerializeField] protected float health;
     [HideInInspector] public bool takenDamage;
@@ -13,11 +14,14 @@ public abstract class EnemyBase : MonoBehaviour
     private Animator enemyAnim;
     private readonly int Explode = Animator.StringToHash("Explode");
 
-    public UnityAction<float> HealthChange; 
+    public UnityAction<float> HealthChange;
     private void OnHealthChange(float currentHealth) => HealthChange?.Invoke(currentHealth);
-    
+
     protected virtual void Awake()
     {
+        var flickEnemy = gameObject.AddComponent<FlickEnemy>();
+        flickEnemy.enemyOpacity = enemyOpacity;
+
         enemyAnim = gameObject.GetComponent<Animator>();
         enemyAnim.runtimeAnimatorController = enemy.animController;
         target = GameObject.FindWithTag("Player").transform;
@@ -40,7 +44,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         health -= amountToLose;
         takenDamage = health < maxHealth;
-        
+
         OnHealthChange(health);
 
         if (health > 0) return;
@@ -60,6 +64,6 @@ public abstract class EnemyBase : MonoBehaviour
 
         Destroy(gameObject);
     }
-    
+
     protected bool canDetectPlayer => Vector2.Distance(transform.position, target.position) <= enemy.detectRange;
 }
