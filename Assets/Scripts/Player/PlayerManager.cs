@@ -4,23 +4,23 @@ public class PlayerManager : Singleton<PlayerManager>
 {
     [SerializeField] private PlayerObject playerObject;
 
-    public float health { get; private set; }
-    public float damage { get; private set; }
-
+    public float Health { get; private set; }
+    public float Damage { get; private set; }
     private void Start()
     {
         PlayerEvents.DamageReceived += ReceivedDamage;
 
-        health = playerObject.health;
-        damage = playerObject.damage;
+        Health = playerObject.health;
+        Damage = playerObject.damage;
     }
 
     private void ReceivedDamage(float amountToLose)
     {
-        health -= amountToLose;
+        Health -= amountToLose;
         
-        print("Health: " + health);
+        print("Health: " + Health);
 
-        if (health <= 0) print("dead"); //Destroy(gameObject);
+        if (Health <= 0) print("dead"); //Destroy(gameObject);
     }
+    //
 }

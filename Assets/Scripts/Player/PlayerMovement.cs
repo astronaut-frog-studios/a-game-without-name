@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+        if (isPlayerHiding)
+        {
+            PlayerEvents.OnPlayerHided();
+        }
+
         mousePosit = filmadora.ScreenToWorldPoint(Input.mousePosition);
     }
 
@@ -38,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool isPlayerMoving => movement.x != 0 || movement.y != 0;
+
+    private bool isPlayerHiding => Input.GetKey(KeyCode.C);
 
     private bool isFacingRight => gunAngle >= gunZMin && gunAngle < gunZMax;
 

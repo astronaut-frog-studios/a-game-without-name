@@ -30,13 +30,20 @@ public abstract class EnemyBase : MonoBehaviour
         maxHealth = enemy.maxHealth;
 
         OnHealthChange(health);
+
+        PlayerEvents.PlayerHided += PlayerIsHiding;
+    }
+
+    void PlayerIsHiding()
+    {
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("PlayerBullet"))
         {
-            ReceivedDamage(PlayerManager.Instance.damage);
+            ReceivedDamage(PlayerManager.Instance.Damage);
         }
     }
 
