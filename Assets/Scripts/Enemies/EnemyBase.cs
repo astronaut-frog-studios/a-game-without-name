@@ -11,6 +11,10 @@ public abstract class EnemyBase : MonoBehaviour
     public float maxHealth;
     protected Transform target;
 
+    [SerializeField] private LayerMask layersToDetect;
+    [ReadOnly, SerializeField] private bool detectSneakyPlayer;
+    [ReadOnly, SerializeField] private bool playerIsHidingEventCalled;
+
     private Animator enemyAnim;
     private readonly int Explode = Animator.StringToHash("Explode");
 
@@ -30,13 +34,7 @@ public abstract class EnemyBase : MonoBehaviour
         maxHealth = enemy.maxHealth;
 
         OnHealthChange(health);
-
         PlayerEvents.PlayerHided += PlayerIsHiding;
-    }
-
-    void PlayerIsHiding()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -60,6 +58,27 @@ public abstract class EnemyBase : MonoBehaviour
         StartCoroutine(TimerToDestroy());
     }
 
+    private void PlayerIsHiding(bool isHiding)
+    {
+        playerIsHidingEventCalled = isHiding;
+
+        if (!playerIsHidingEventCalled) return;
+
+        var rayHit2D = Physics2D.Raycast(transform.position, target.position - transform.position, enemy.detectRange, layersToDetect);
+        if (rayHit2D.transform)
+        {
+            if (!(rayHit2D.transform.CompareTag("Player")))
+            {
+                detectSneakyPlayer = false;
+                Debug.DrawLine(transform.position, rayHit2D.point, Color.red);
+                return;
+            }
+
+            detectSneakyPlayer = true;
+            Debug.DrawLine(transform.position, rayHit2D.point, Color.green);
+        }
+    }
+
     private IEnumerator TimerToDestroy()
     {
         yield return new WaitForSeconds(0.12f);
@@ -72,5 +91,7 @@ public abstract class EnemyBase : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected bool canDetectPlayer => Vector2.Distance(transform.position, target.position) <= enemy.detectRange;
+    protected bool canDetectPlayer => Vector2.Distance(transform.position, target.position) <= enemy.detectRange && !playerIsHidingEventCalled ||
+    detectSneakyPlayer && playerIsHidingEventCalled;
+
 }

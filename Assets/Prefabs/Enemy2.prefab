@@ -427,6 +427,11 @@ MonoBehaviour:
   health: 0
   takenDamage: 0
   maxHealth: 0
+  layersToDetect:
+    serializedVersion: 2
+    m_Bits: 520
+  detectSneakyPlayer: 0
+  playerIsHidingEventCalled: 0
   state: 5
   stoppingDistance: 0.25
   bulletSpeed: 5

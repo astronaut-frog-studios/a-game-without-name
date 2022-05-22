@@ -380,6 +380,11 @@ MonoBehaviour:
   health: 0
   takenDamage: 0
   maxHealth: 0
+  layersToDetect:
+    serializedVersion: 2
+    m_Bits: 520
+  detectSneakyPlayer: 0
+  playerIsHidingEventCalled: 0
 --- !u!114 &5816920337774714514
 MonoBehaviour:
   m_ObjectHideFlags: 0
