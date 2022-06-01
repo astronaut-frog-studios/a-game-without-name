@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f93109a6c5de24b94f4a0767b4b1f6, type: 3}
   m_Name: WalkingEnemy_SO
   m_EditorClassIdentifier: 
-  health: 5
-  maxHealth: 5
-  speed: 0.4
+  health: 4
+  maxHealth: 4
+  speed: 0.8
   damage: 4
   detectRange: 5
   attackRange: 1.4
