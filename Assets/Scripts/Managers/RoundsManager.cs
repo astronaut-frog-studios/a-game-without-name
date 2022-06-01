@@ -15,21 +15,15 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
     [SerializeField] private float timeBetweenRounds = 10f;
     [SerializeField] private float roundCountdown;
 
-    [SerializeField] private int currentRound;
-    public int getCurrentRound => currentRound;
-
+    public int getCurrentRound => gameManager.currentRound;
     private WavesSpawner wavesSpawner;
 
     public delegate void StartWaveHandler();
-
     public event StartWaveHandler StartedWave;
 
     public delegate void TurnLightsOffHandler();
-
     public event TurnLightsOffHandler TurnLightsOff;
-
     public delegate void TurnLightsOnHandler();
-
     public event TurnLightsOnHandler TurnLightsOn;
 
     protected override void Awake()
@@ -70,6 +64,8 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
             AudioSystem.Instance.StopPlaying("safe-area");
             // tocar a musica da fase
 
+            gameManager.displayRound.gameObject.SetActive(true);
+
             TurnLightsOff?.Invoke();
             StartedWave?.Invoke();
             state = RoundState.WAVES_STARTED;
@@ -79,7 +75,8 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
 
         if (state == RoundState.ROUND_STARTED)
         {
-            currentRound++;
+            gameManager.currentRound++;
+            gameManager.displayRound.text = getCurrentRound.ToString();
 
             AudioSystem.Instance.PlayMusic("safe-area");
             TurnLightsOn?.Invoke();
@@ -89,8 +86,11 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
 
         roundCountdown -= Time.deltaTime;
         print("SafeZone time");
+        gameManager.displayRound.gameObject.SetActive(false);
         // está entre os rounds, safe zone. Falar com npcs, comprar coisas e tudo mais
     }
 
     private void FinishedRound() => state = RoundState.FINISHED;
+
+    private SaveGameManager gameManager => SaveGameManager.Instance;
 }
