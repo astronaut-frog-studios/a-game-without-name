@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemiesTypes : Singleton<EnemiesTypes>
+public class EnemyTypes : Singleton<EnemyTypes>
 {
     public GameObject[] enemies;
 }
