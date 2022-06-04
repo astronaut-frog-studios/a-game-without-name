@@ -38,7 +38,7 @@ public class FollowEnemy : EnemyBase
 
     private void CheckPlayerLookDirection()
     {
-        if (isFacingRight)
+        if (facingToPlayer)
         {
             transform.localScale = new Vector3(-1, 1, 1);
             return;
@@ -47,5 +47,5 @@ public class FollowEnemy : EnemyBase
         transform.localScale = new Vector3(1, 1, 1);
     }
 
-    private bool isFacingRight => rigidbody.velocity.x > 0;
+    private bool facingToPlayer => rigidbody.velocity.x > 0;
 }
