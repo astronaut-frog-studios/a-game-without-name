@@ -4,13 +4,17 @@ using UnityEngine.Events;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private EnemyOpacityObject enemyOpacity;
-    [SerializeField] protected EnemyObject enemy;
+    [Header("Common Variables")]
+    [ReadOnly, SerializeField] private EnemyOpacityObject enemyOpacity;
+    [ReadOnly, SerializeField] protected EnemyObject enemy;
     [ReadOnly, SerializeField] protected float health;
+    [ReadOnly, SerializeField] protected float attackCooldown;
     [HideInInspector] public bool takenDamage;
+    protected new Rigidbody2D rigidbody;
     public float maxHealth;
     protected Transform target;
 
+    [Header("Detect Player")]
     [SerializeField] private LayerMask layersToDetect;
     [ReadOnly, SerializeField] private bool detectSneakyPlayer;
     [ReadOnly, SerializeField] private bool playerIsHidingEventCalled;
@@ -37,12 +41,10 @@ public abstract class EnemyBase : MonoBehaviour
         PlayerEvents.PlayerHided += PlayerIsHiding;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    protected virtual void Start()
     {
-        if (col.gameObject.CompareTag("PlayerBullet"))
-        {
-            ReceivedDamage(PlayerManager.Instance.Damage);
-        }
+        rigidbody = GetComponent<Rigidbody2D>();
+        attackCooldown = enemy.attackCooldown;
     }
 
     private void ReceivedDamage(float amountToLose)
@@ -79,6 +81,14 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("PlayerBullet"))
+        {
+            ReceivedDamage(PlayerManager.Instance.Damage);
+        }
+    }
+
     private IEnumerator TimerToDestroy()
     {
         yield return new WaitForSeconds(0.12f);
@@ -91,7 +101,11 @@ public abstract class EnemyBase : MonoBehaviour
         Destroy(gameObject);
     }
 
+    #region getters
     protected bool canDetectPlayer => Vector2.Distance(transform.position, target.position) <= enemy.detectRange && !playerIsHidingEventCalled ||
     detectSneakyPlayer && playerIsHidingEventCalled;
-
+    protected void StopEnemy() => rigidbody.velocity = Vector2.zero;
+    protected bool closerToPlayer => target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
+    protected bool inCooldown => attackCooldown > 0;
+    #endregion
 }

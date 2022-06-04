@@ -2,15 +2,6 @@ using UnityEngine;
 
 public class FollowEnemy : EnemyBase
 {
-    private float attackCooldown;
-    private new Rigidbody2D rigidbody;
-
-    private void Start()
-    {
-        rigidbody = GetComponent<Rigidbody2D>();
-        attackCooldown = enemy.attackCooldown;
-    }
-
     private void FixedUpdate()
     {
         CheckAttackCooldown();
@@ -56,8 +47,5 @@ public class FollowEnemy : EnemyBase
         transform.localScale = new Vector3(1, 1, 1);
     }
 
-    private void StopEnemy() => rigidbody.velocity = Vector2.zero;
-    private bool closerToPlayer => target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
     private bool isFacingRight => rigidbody.velocity.x > 0;
-    private bool inCooldown => attackCooldown > 0;
 }

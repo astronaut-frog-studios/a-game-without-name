@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Events;
 
 internal enum ShootEnemyState
 {
@@ -16,21 +13,15 @@ internal enum ShootEnemyState
 
 public class ShootEnemy : EnemyBase
 {
+    [Header("Shoot Enemy")]
     [SerializeField] private ShootEnemyState state = ShootEnemyState.SEARCHING_RANDOM_POS;
+    [Space(12.0f)]
     [SerializeField] private float stoppingDistance = 0.25f;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private Bullet bulletPrefab;
 
     private Bullet bullet;
-    private float attackCooldown;
     private Vector2 randomPosition;
-    private new Rigidbody2D rigidbody;
-
-    private void Start()
-    {
-        rigidbody = GetComponent<Rigidbody2D>();
-        attackCooldown = enemy.attackCooldown;
-    }
 
     private void FixedUpdate()
     {
@@ -108,7 +99,6 @@ public class ShootEnemy : EnemyBase
     {
         randomPosition = (Vector2)transform.position + Random.insideUnitCircle * (enemy.detectRange + 2);
         rigidbody.velocity = GetDirection(randomPosition) * enemy.speed;
-        // Debug.DrawLine(transform.position, randomPosition, Color.green, 5f);
         state = ShootEnemyState.WALKING;
     }
 
@@ -154,10 +144,7 @@ public class ShootEnemy : EnemyBase
         state = ShootEnemyState.SEARCHING_RANDOM_POS;
     }
 
-    private void StopEnemy() => rigidbody.velocity = Vector2.zero;
     private bool pathPending => Vector2.Distance(rigidbody.position, randomPosition) > stoppingDistance;
-    private bool closerToPlayer => target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
-    private bool inCooldown => attackCooldown > 0;
     private bool preparingAttack => state is ShootEnemyState.PREPARING_ATTACK && inCooldown;
     private bool canCheckBulletCollision => state is ShootEnemyState.SHOOTING && bullet;
     private bool bulletHasCollide => bullet &&
