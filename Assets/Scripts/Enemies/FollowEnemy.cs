@@ -30,12 +30,6 @@ public class FollowEnemy : EnemyBase
         CheckPlayerLookDirection();
     }
 
-    private void CheckAttackCooldown()
-    {
-        if (inCooldown)
-            attackCooldown -= Time.deltaTime;
-    }
-
     private void CheckPlayerLookDirection()
     {
         if (facingToPlayer)

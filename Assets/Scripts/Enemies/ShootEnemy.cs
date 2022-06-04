@@ -74,12 +74,6 @@ public class ShootEnemy : EnemyBase
         bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
     }
 
-    private void CheckAttackCooldown()
-    {
-        if (inCooldown)
-            attackCooldown -= Time.deltaTime;
-    }
-
     private void CheckWalkingState()
     {
         if (state is ShootEnemyState.WALKING)

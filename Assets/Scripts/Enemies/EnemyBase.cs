@@ -5,8 +5,8 @@ using UnityEngine.Events;
 public abstract class EnemyBase : MonoBehaviour
 {
     [Header("Common Variables")]
-    [ReadOnly, SerializeField] private EnemyOpacityObject enemyOpacity;
-    [ReadOnly, SerializeField] protected EnemyObject enemy;
+    [SerializeField] private EnemyOpacityObject enemyOpacity;
+    [SerializeField] protected EnemyObject enemy;
     [ReadOnly, SerializeField] protected float health;
     [ReadOnly, SerializeField] protected float attackCooldown;
     [HideInInspector] public bool takenDamage;
@@ -87,6 +87,12 @@ public abstract class EnemyBase : MonoBehaviour
         {
             ReceivedDamage(PlayerManager.Instance.Damage);
         }
+    }
+
+    protected void CheckAttackCooldown()
+    {
+        if (inCooldown)
+            attackCooldown -= Time.deltaTime;
     }
 
     private IEnumerator TimerToDestroy()
