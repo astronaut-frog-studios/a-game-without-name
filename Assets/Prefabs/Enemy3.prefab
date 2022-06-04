@@ -385,7 +385,7 @@ MonoBehaviour:
     m_Bits: 520
   detectSneakyPlayer: 0
   playerIsHidingEventCalled: 0
-  state: 3
+  state: 2
   stoppingDistance: 0.12
   directionOffset: {x: 3, y: 0, z: 0}
 --- !u!1 &7497542938601956320

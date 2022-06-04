@@ -23,20 +23,54 @@ public class WalkEnemy : EnemyBase
     {
         CheckAttackCooldown();
 
-        if (!canDetectPlayer)
+        if (state is WalkEnemyState.WAITING) return;
+
+        if (!canDetectPlayer || state is WalkEnemyState.SEARCHING_RANDOM_POS)
         {
             // search randomPositions closer to it
+            state = WalkEnemyState.SEARCHING_RANDOM_POS;
+
+            if (state is WalkEnemyState.WALKING)
+            {
+                print("is WALINKG && pathPending");
+                if (pathPending) return;
+
+                print("searching random pos IF is not pathPending");
+                state = WalkEnemyState.WAITING;
+                StartCoroutine(WaitToSearchRandomPos());
+                return;
+            }
+
+
+            if (state != WalkEnemyState.SEARCHING_RANDOM_POS) return;
+
+            print("searching random pos IF state is not walking already");
+            state = WalkEnemyState.WAITING;
+            StartCoroutine(WaitToSearchRandomPos());
             return;
         }
 
         if (closerToPlayer)
         {
-            StopEnemy();
             // stopp walking, and attack player if isn't in cooldown. SearchRandomPos
+            StopEnemy();
+
+            if (inCooldown)
+            {
+                state = WalkEnemyState.SEARCHING_RANDOM_POS;
+                print("closerToPlayer && inCooldown");
+                return;
+            }
+
+            // attack animation
+            print("closerToPlayer && attacking");
+            PlayerEvents.OnDamageReceived(enemy.damage);
+            attackCooldown = enemy.attackCooldown;
             return;
         }
 
-        // far from player and canDetectPlayer
+        // far from player but canDetectPlayer
+        print("far from player but canDetectPlayer. Walk towards player");
         state = WalkEnemyState.WALKING_TO_PLAYER;
 
         var targetDirection = target.transform.position - transform.position; // add offset
@@ -44,9 +78,12 @@ public class WalkEnemy : EnemyBase
 
         var finalDirection = facingToPlayer ? targetDirection - directionOffset : targetDirection + directionOffset;
         rigidbody.velocity = finalDirection * enemy.speed;
+        CheckPlayerLookDirection();
 
         // search random position closer to player and walks to it.
     }
+
+
 
     private void CheckPlayerLookDirection()
     {
@@ -57,6 +94,28 @@ public class WalkEnemy : EnemyBase
         }
 
         transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    private Vector2 GetDirection(Vector2 targetPosition)
+    {
+        var direction = targetPosition - (Vector2)transform.position;
+        direction.Normalize();
+
+        return direction;
+    }
+
+    private void WalkToRandomPos()
+    {
+        randomPosition = (Vector2)transform.position + Random.insideUnitCircle * (enemy.detectRange + 2);
+        rigidbody.velocity = GetDirection(randomPosition) * enemy.speed;
+        state = WalkEnemyState.WALKING;
+    }
+
+    private IEnumerator WaitToSearchRandomPos()
+    {
+        StopEnemy();
+        yield return new WaitForSeconds(.8f);
+        state = WalkEnemyState.SEARCHING_RANDOM_POS;
     }
 
     private bool pathPending => Vector2.Distance(rigidbody.position, randomPosition) > stoppingDistance;
