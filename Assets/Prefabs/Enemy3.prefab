@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: -6735514617869340923}
   - component: {fileID: 6844884236774020515}
   - component: {fileID: 2021714399}
-  - component: {fileID: 5968408525537678371}
+  - component: {fileID: 6446718289395622333}
   m_Layer: 7
   m_Name: Enemy3
   m_TagString: Enemy
@@ -228,7 +228,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: de346a337cbf9df45a9feb86cd26717f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c86468a559ca2b54c8084aa1e054f853, type: 3}
   m_Color: {r: 0.92896307, g: 0.042452812, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -256,7 +256,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.0685713, y: 2.3857143}
+    oldSize: {x: 1.7524999, y: 2.9370866}
     newSize: {x: 2.0685713, y: 2.3857143}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -361,8 +361,8 @@ MonoBehaviour:
   low: {r: 1, g: 0, b: 0.1585164, a: 1}
   high: {r: 0, g: 0.6320754, b: 0.39615732, a: 1}
   healthSlider: {fileID: 2287020224625319376}
-  enemyPros: {fileID: 5968408525537678371}
---- !u!114 &5968408525537678371
+  enemyPros: {fileID: 0}
+--- !u!114 &6446718289395622333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -371,13 +371,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7016307679373651356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf3aa8812861906429bc67d13bec9927, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ea96067bc2b5e94c997caa88d0fcc47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 11400000, guid: ae47ef4c517da5947ba06d283ebcf1cd, type: 2}
+  enemyOpacity: {fileID: 11400000, guid: f770a02634f7e71479b9823a43db5406, type: 2}
+  enemy: {fileID: 11400000, guid: 4a10637d20169b24fa89a85ae475e22a, type: 2}
   health: 0
+  attackCooldown: 0
   takenDamage: 0
   maxHealth: 0
+  layersToDetect:
+    serializedVersion: 2
+    m_Bits: 520
+  detectSneakyPlayer: 0
+  playerIsHidingEventCalled: 0
+  state: 3
+  stoppingDistance: 0.12
+  directionOffset: {x: 3, y: 0, z: 0}
 --- !u!1 &7497542938601956320
 GameObject:
   m_ObjectHideFlags: 0
