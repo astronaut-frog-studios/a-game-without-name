@@ -32,7 +32,7 @@ public class WaveSpawnerHelpers
 
     public IEnumerable<Wave> CreateBaseWaves()
     {
-        for (var i = 0; i < 3; i++)
+        for (var i = 0; i < EnemyTypes.Instance.enemies.Length - 1; i++)
         {
             var enemies = enemiesArray(i);
 

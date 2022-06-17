@@ -31,7 +31,7 @@ public class WavesSpawner : MonoBehaviour
     public event WaveFinishedHandler WaveFinished;
 
     private readonly WaveSpawnerHelpers waveSpawnerHelpers = new WaveSpawnerHelpers();
-    
+
     private void Start()
     {
         waveCountdown = timeBetweenWaves;
@@ -111,7 +111,7 @@ public class WavesSpawner : MonoBehaviour
     {
         // Vector2 spawnPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         // spawnPosition += Random.insideUnitCircle * spawnRadius;
-        
+
         Instantiate(_enemyToSpawn, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
     }
 
