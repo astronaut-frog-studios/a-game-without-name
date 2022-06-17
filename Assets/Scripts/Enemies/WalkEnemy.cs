@@ -27,8 +27,11 @@ public class WalkEnemy : EnemyBase
 
         if (!canDetectPlayer || state is WalkEnemyState.SEARCHING_RANDOM_POS)
         {
-            // search randomPositions closer to it
-            state = WalkEnemyState.SEARCHING_RANDOM_POS;
+            if (state is WalkEnemyState.WALKING_TO_PLAYER)
+            {
+                StartCoroutine(WaitToSearchRandomPos());
+                return;
+            }
 
             if (state is WalkEnemyState.WALKING)
             {
@@ -41,12 +44,10 @@ public class WalkEnemy : EnemyBase
                 return;
             }
 
-
             if (state != WalkEnemyState.SEARCHING_RANDOM_POS) return;
 
             print("searching random pos IF state is not walking already");
-            state = WalkEnemyState.WAITING;
-            StartCoroutine(WaitToSearchRandomPos());
+            WalkToRandomPos();
             return;
         }
 
@@ -69,21 +70,15 @@ public class WalkEnemy : EnemyBase
             return;
         }
 
-        // far from player but canDetectPlayer
         print("far from player but canDetectPlayer. Walk towards player");
         state = WalkEnemyState.WALKING_TO_PLAYER;
 
-        var targetDirection = target.transform.position - transform.position; // add offset
-        targetDirection.Normalize();
+        var targetDirection = target.transform.position - transform.position;
+        var finalDirection = facingToPlayer ? targetDirection + directionOffset : targetDirection - directionOffset;
 
-        var finalDirection = facingToPlayer ? targetDirection - directionOffset : targetDirection + directionOffset;
-        rigidbody.velocity = finalDirection * enemy.speed;
+        rigidbody.velocity = finalDirection * enemy.speed / 2;
         CheckPlayerLookDirection();
-
-        // search random position closer to player and walks to it.
     }
-
-
 
     private void CheckPlayerLookDirection()
     {
@@ -113,6 +108,7 @@ public class WalkEnemy : EnemyBase
 
     private IEnumerator WaitToSearchRandomPos()
     {
+        state = WalkEnemyState.WAITING;
         StopEnemy();
         yield return new WaitForSeconds(.8f);
         state = WalkEnemyState.SEARCHING_RANDOM_POS;
