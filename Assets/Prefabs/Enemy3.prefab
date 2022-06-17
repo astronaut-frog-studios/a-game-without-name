@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 6844884236774020515}
   - component: {fileID: 2021714399}
   - component: {fileID: 6446718289395622333}
+  - component: {fileID: 8989703488087349221}
   m_Layer: 7
   m_Name: Enemy3
   m_TagString: Enemy
@@ -180,7 +181,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7016307679373651356}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -2.9796715, y: -0.067504644, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -387,7 +388,20 @@ MonoBehaviour:
   playerIsHidingEventCalled: 0
   state: 2
   stoppingDistance: 0.12
-  directionOffset: {x: 3, y: 0, z: 0}
+  directionOffset: {x: 1.5, y: 1, z: 0}
+--- !u!114 &8989703488087349221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7016307679373651356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254583e9c0c2fb94dafc8e8f6da6d865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5.5
 --- !u!1 &7497542938601956320
 GameObject:
   m_ObjectHideFlags: 0
