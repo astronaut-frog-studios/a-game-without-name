@@ -35,10 +35,8 @@ public class WalkEnemy : EnemyBase
 
             if (state is WalkEnemyState.WALKING)
             {
-                print("is WALINKG && pathPending");
                 if (pathPending) return;
 
-                print("searching random pos IF is not pathPending");
                 state = WalkEnemyState.WAITING;
                 StartCoroutine(WaitToSearchRandomPos());
                 return;
@@ -46,31 +44,26 @@ public class WalkEnemy : EnemyBase
 
             if (state != WalkEnemyState.SEARCHING_RANDOM_POS) return;
 
-            print("searching random pos IF state is not walking already");
             WalkToRandomPos();
             return;
         }
 
         if (closerToPlayer)
         {
-            // stopp walking, and attack player if isn't in cooldown. SearchRandomPos
             StopEnemy();
 
             if (inCooldown)
             {
                 state = WalkEnemyState.SEARCHING_RANDOM_POS;
-                print("closerToPlayer && inCooldown");
                 return;
             }
 
             // attack animation
-            print("closerToPlayer && attacking");
             PlayerEvents.OnDamageReceived(enemy.damage);
             attackCooldown = enemy.attackCooldown;
             return;
         }
 
-        print("far from player but canDetectPlayer. Walk towards player");
         state = WalkEnemyState.WALKING_TO_PLAYER;
 
         var targetDirection = target.transform.position - transform.position;
