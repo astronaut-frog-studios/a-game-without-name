@@ -44,7 +44,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        attackCooldown = enemy.attackCooldown;
+        attackCooldown = 0;
     }
 
     private void ReceivedDamage(float amountToLose)
