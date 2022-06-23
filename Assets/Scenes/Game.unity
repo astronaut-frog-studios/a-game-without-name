@@ -3124,10 +3124,6 @@ PrefabInstance:
       propertyPath: filmadora
       value: 
       objectReference: {fileID: 692607044}
-    - target: {fileID: 7039043350667713867, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7039043350667713870, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
       propertyPath: m_SortingOrder
       value: 1
