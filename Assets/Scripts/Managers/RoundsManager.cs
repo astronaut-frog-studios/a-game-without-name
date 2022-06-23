@@ -15,7 +15,7 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
     [SerializeField] private float timeBetweenRounds = 10f;
     [SerializeField] private float roundCountdown;
 
-    public int getCurrentRound => gameManager.currentRound;
+    public int getCurrentRound => saveGameManager.currentRound;
     private WavesSpawner wavesSpawner;
 
     public delegate void StartWaveHandler();
@@ -64,7 +64,7 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
             AudioSystem.Instance.StopPlaying("safe-area");
             // tocar a musica da fase
 
-            gameManager.displayRound.gameObject.SetActive(true);
+            saveGameManager.displayRound.gameObject.SetActive(true);
 
             TurnLightsOff?.Invoke();
             StartedWave?.Invoke();
@@ -75,22 +75,28 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
 
         if (state == RoundState.ROUND_STARTED)
         {
-            gameManager.currentRound++;
-            gameManager.displayRound.text = getCurrentRound.ToString();
+            saveGameManager.currentRound++;
+            saveGameManager.displayRound.text = getCurrentRound.ToString();
 
             AudioSystem.Instance.PlayMusic("safe-area");
             TurnLightsOn?.Invoke();
+
+            if (saveGameManager.currentRound > 1)
+            {
+                PlayerEvents.OnPlayerDifficultyChange();
+                Difficulty.OnEnemyDifficultyChange();
+            }
 
             state = RoundState.WAITING;
         }
 
         roundCountdown -= Time.deltaTime;
         print("SafeZone time");
-        gameManager.displayRound.gameObject.SetActive(false);
+        saveGameManager.displayRound.gameObject.SetActive(false);
         // está entre os rounds, safe zone. Falar com npcs, comprar coisas e tudo mais
     }
 
     private void FinishedRound() => state = RoundState.FINISHED;
 
-    private SaveGameManager gameManager => SaveGameManager.Instance;
+    private SaveGameManager saveGameManager => SaveGameManager.Instance;
 }

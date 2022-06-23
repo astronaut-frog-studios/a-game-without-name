@@ -23,5 +23,6 @@ public class SaveGameManager : PersistentSingleton<SaveGameManager>
     public void SaveAll()
     {
         saveGameObject.currentRound = currentRound;
+        Difficulty.Instance.OnSave();
     }
 }
