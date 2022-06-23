@@ -7,8 +7,11 @@ public class PlayerManager : Singleton<PlayerManager>
     public float Health { get; private set; }
     public float Damage { get; private set; }
 
+    private PlayerCollisions playerCollisions;
+
     private void Start()
     {
+        playerCollisions = GetComponent<PlayerCollisions>();
         PlayerEvents.DamageReceived += ReceivedDamage;
 
         Health = playerObject.health;
@@ -17,6 +20,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void ReceivedDamage(float amountToLose)
     {
+        playerCollisions.DamageReceived();
         Health -= amountToLose;
 
         print("Health: " + Health);

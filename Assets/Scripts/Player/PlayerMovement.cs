@@ -49,11 +49,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool isPlayerMoving => movement.x != 0 || movement.y != 0;
-
     private bool isPlayerHiding => Input.GetKey(KeyCode.C);
     private bool playerStoppedHiding => Input.GetKeyUp(KeyCode.C);
-
-    private bool isFacingRight => gunAngle >= gunZMin && gunAngle < gunZMax;
+    public bool isFacingRight => gunAngle >= gunZMin && gunAngle < gunZMax;
 
     private void PlayPlayerAnims()
     {
