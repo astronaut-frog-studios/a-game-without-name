@@ -87,7 +87,7 @@ public class WalkEnemy : EnemyBase
 
     private void WalkToRandomPos()
     {
-        randomPosition = (Vector2)transform.position + Random.insideUnitCircle * (enemy.detectRange + 2);
+        randomPosition = new Vector2(LevelBounds.RandomPosX, LevelBounds.RandomPosY);
         rigidbody.velocity = GetDirection(randomPosition) * enemy.speed;
         state = WalkEnemyState.WALKING;
     }

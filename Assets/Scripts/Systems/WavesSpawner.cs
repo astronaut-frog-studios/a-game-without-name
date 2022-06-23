@@ -16,7 +16,8 @@ public class WavesSpawner : MonoBehaviour
     [SerializeField] private WaveState state = WaveState.INACTIVE;
 
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float spawnRadius = 15f;
+
+    [SerializeField] private float spawnRadius = 5f;
 
     [SerializeField] private List<Wave> waves = new List<Wave>();
     private int nextWaveIndex;
@@ -34,6 +35,7 @@ public class WavesSpawner : MonoBehaviour
 
     private void Start()
     {
+
         waveCountdown = timeBetweenWaves;
         enemySearchCountdown = enemySearchTime;
 
@@ -109,10 +111,12 @@ public class WavesSpawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject _enemyToSpawn)
     {
-        // Vector2 spawnPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        // spawnPosition += Random.insideUnitCircle * spawnRadius;
+        // Instantiate(_enemyToSpawn, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
 
-        Instantiate(_enemyToSpawn, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
+        var spawnPositionX = LevelBounds.RandomPosX;
+        var spawnPositionY = LevelBounds.RandomPosY;
+
+        Instantiate(_enemyToSpawn, new Vector2(spawnPositionX, spawnPositionY), Quaternion.identity);
     }
 
     private void OnWaveCompleted()
