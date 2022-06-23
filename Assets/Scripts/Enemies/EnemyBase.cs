@@ -34,8 +34,8 @@ public abstract class EnemyBase : MonoBehaviour
         enemyAnim.runtimeAnimatorController = enemy.animController;
         target = GameObject.FindWithTag("Player").transform;
 
-        health = enemy.health;
-        maxHealth = enemy.maxHealth;
+        health = enemy.health + Difficulty.Instance.enemyHealth;
+        maxHealth = enemy.maxHealth + Difficulty.Instance.enemyHealth;
 
         OnHealthChange(health);
         PlayerEvents.PlayerHided += PlayerIsHiding;
