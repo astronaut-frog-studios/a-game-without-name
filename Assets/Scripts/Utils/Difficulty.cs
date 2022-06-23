@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Difficulty : PersistentSingleton<Difficulty>
 {
@@ -22,20 +23,30 @@ public class Difficulty : PersistentSingleton<Difficulty>
 
     [Header("Player")]
     [HideInInspector] public float playerHealthMultiplier;
-    [ReadOnly, SerializeField] public float playeryHealth;
+    [ReadOnly, SerializeField] public float playerHealth;
     [HideInInspector] public float playerDamageMultiplier;
     [ReadOnly, SerializeField] public float playerDamage;
 
     public float SpawnRateDifficulty => spawnRate += spawnRateMultiplier;
     public int EnemiesNumberDifficulty => numberOfEnemies += numberOfEnemiesMultiplier;
 
-    private void Start()
+    public static event UnityAction EnemyDifficulty;
+    public static void OnEnemyDifficultyChange() => EnemyDifficulty?.Invoke();
+
+    protected override void Awake()
     {
+        base.Awake();
+
         SetNumberOfEnemies();
         SetSpawnRate();
         SetSpecialWave();
         SetEnemies();
         SetPlayer();
+    }
+
+    private void Start()
+    {
+        EnemyDifficulty += UpdateEnemyValues;
     }
 
     private void SetNumberOfEnemies()
@@ -69,9 +80,22 @@ public class Difficulty : PersistentSingleton<Difficulty>
     private void SetPlayer()
     {
         playerHealthMultiplier = difficultyObject.playerHealthMultiplier;
-        playeryHealth = difficultyObject.playeryHealth;
+        playerHealth = difficultyObject.playeryHealth;
         playerDamageMultiplier = difficultyObject.playerDamageMultiplier;
         playerDamage = difficultyObject.playerDamage;
+    }
+
+    public void UpdatePlayerValues()
+    {
+        playerHealth += playerHealthMultiplier;
+        playerDamage += playerDamageMultiplier;
+    }
+
+    public void UpdateEnemyValues()
+    {
+        enemyHealth += enemyHealthMultiplier;
+        enemyDamage += enemyDamageMultiplier;
+        enemyCooldown -= enemyCooldownMultiplier;
     }
 
     public void OnSave()
@@ -89,7 +113,7 @@ public class Difficulty : PersistentSingleton<Difficulty>
         difficultyObject.enemyCooldown = enemyCooldown;
 
         difficultyObject.playerHealthMultiplier = playerHealthMultiplier;
-        difficultyObject.playeryHealth = playeryHealth;
+        difficultyObject.playeryHealth = playerHealth;
         difficultyObject.playerDamageMultiplier = playerDamageMultiplier;
         difficultyObject.playerDamage = playerDamage;
     }
