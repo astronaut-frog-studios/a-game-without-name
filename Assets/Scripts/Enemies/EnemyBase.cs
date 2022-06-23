@@ -85,6 +85,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (col.gameObject.CompareTag("PlayerBullet"))
         {
+            Destroy(col.gameObject);
             ReceivedDamage(PlayerManager.Instance.Damage);
         }
     }

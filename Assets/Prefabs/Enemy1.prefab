@@ -378,6 +378,7 @@ MonoBehaviour:
   enemyOpacity: {fileID: 11400000, guid: f770a02634f7e71479b9823a43db5406, type: 2}
   enemy: {fileID: 11400000, guid: 0f48ee6820be23f4b8f03b81886698e8, type: 2}
   health: 0
+  attackCooldown: 0
   takenDamage: 0
   maxHealth: 0
   layersToDetect:

@@ -25,7 +25,7 @@ public class WalkEnemy : EnemyBase
 
         if (state is WalkEnemyState.WAITING) return;
 
-        if (!canDetectPlayer || state is WalkEnemyState.SEARCHING_RANDOM_POS)
+        if (!canDetectPlayer || inCooldown || state is WalkEnemyState.SEARCHING_RANDOM_POS)
         {
             if (state is WalkEnemyState.WALKING_TO_PLAYER)
             {
@@ -37,7 +37,6 @@ public class WalkEnemy : EnemyBase
             {
                 if (pathPending) return;
 
-                state = WalkEnemyState.WAITING;
                 StartCoroutine(WaitToSearchRandomPos());
                 return;
             }
@@ -48,15 +47,9 @@ public class WalkEnemy : EnemyBase
             return;
         }
 
-        if (closerToPlayer)
+        if (closerToPlayer && !inCooldown)
         {
             StopEnemy();
-
-            if (inCooldown)
-            {
-                state = WalkEnemyState.SEARCHING_RANDOM_POS;
-                return;
-            }
 
             // attack animation
             PlayerEvents.OnDamageReceived(enemy.damage);
@@ -103,7 +96,7 @@ public class WalkEnemy : EnemyBase
     {
         state = WalkEnemyState.WAITING;
         StopEnemy();
-        yield return new WaitForSeconds(.8f);
+        yield return new WaitForSeconds(.5f);
         state = WalkEnemyState.SEARCHING_RANDOM_POS;
     }
 

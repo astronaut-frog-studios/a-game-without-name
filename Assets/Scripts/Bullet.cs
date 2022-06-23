@@ -9,13 +9,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float autoDestroyTime = 5f;
 
     public Rigidbody2D rigid;
-    
+
     private void OnEnable()
     {
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         Destroy(gameObject);
 
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-       StartCoroutine(DestroySelfAfterSeconds(autoDestroyTime)); // Destruir ela depois de um tempo para não consumir memoria
+        StartCoroutine(DestroySelfAfterSeconds(autoDestroyTime)); // Destruir ela depois de um tempo para não consumir memoria
     }
 
     private IEnumerator DestroySelfAfterSeconds(float destroyTime)

@@ -23,11 +23,7 @@ public class FollowEnemy : EnemyBase
             return;
         }
 
-        var direction = target.transform.position - transform.position;
-        direction.Normalize();
-        rigidbody.velocity = direction * enemy.speed;
-
-        CheckPlayerLookDirection();
+        WalkToPlayer();
     }
 
     private void CheckPlayerLookDirection()
@@ -39,6 +35,15 @@ public class FollowEnemy : EnemyBase
         }
 
         transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    private void WalkToPlayer()
+    {
+        var direction = target.transform.position - transform.position;
+        direction.Normalize();
+        rigidbody.velocity = direction * enemy.speed;
+
+        CheckPlayerLookDirection();
     }
 
     private bool facingToPlayer => rigidbody.velocity.x > 0;
