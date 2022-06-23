@@ -9,9 +9,10 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected EnemyObject enemy;
     [ReadOnly, SerializeField] protected float health;
     [ReadOnly, SerializeField] protected float attackCooldown;
+    [ReadOnly, SerializeField] protected float damage;
     [HideInInspector] public bool takenDamage;
+    [HideInInspector] public float maxHealth;
     protected new Rigidbody2D rigidbody;
-    public float maxHealth;
     protected Transform target;
 
     [Header("Detect Player")]
@@ -27,18 +28,23 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        target = GameObject.FindWithTag("Player").transform;
+
         var flickEnemy = gameObject.AddComponent<FlickEnemy>();
         flickEnemy.enemyOpacity = enemyOpacity;
 
         enemyAnim = gameObject.GetComponent<Animator>();
         enemyAnim.runtimeAnimatorController = enemy.animController;
-        target = GameObject.FindWithTag("Player").transform;
+
 
         health = enemy.health + Difficulty.Instance.enemyHealth;
-        maxHealth = enemy.maxHealth + Difficulty.Instance.enemyHealth;
+        maxHealth = enemy.maxHealth;
+        damage = enemy.damage + Difficulty.Instance.enemyDamage;
+        attackCooldown = 0 - Difficulty.Instance.enemyCooldown;
 
         OnHealthChange(health);
         PlayerEvents.PlayerHided += PlayerIsHiding;
+        Difficulty.EnemyDifficulty += ChangeEnemyDifficulty;
     }
 
     protected virtual void Start()
@@ -94,6 +100,13 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (inCooldown)
             attackCooldown -= Time.deltaTime;
+    }
+
+    private void ChangeEnemyDifficulty()
+    {
+        health += Difficulty.Instance.enemyHealth;
+        damage += Difficulty.Instance.enemyDamage;
+        attackCooldown -= Difficulty.Instance.enemyCooldown;
     }
 
     private IEnumerator TimerToDestroy()
