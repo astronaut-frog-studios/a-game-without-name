@@ -12,4 +12,6 @@ public static class PlayerEvents
     public static event UnityAction<bool> PlayerHided;
     public static void OnPlayerHided(bool isHiding) => PlayerHided?.Invoke(isHiding);
 
+    public static event UnityAction PlayerDifficulty;
+    public static void OnPlayerDifficultyChange() => PlayerDifficulty?.Invoke();
 }

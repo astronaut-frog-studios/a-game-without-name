@@ -7,15 +7,23 @@ public class PlayerManager : Singleton<PlayerManager>
     public float Health { get; private set; }
     public float Damage { get; private set; }
 
+    [SerializeField] private float health;
+    [SerializeField] private float damage;
+
     private PlayerCollisions playerCollisions;
 
     private void Start()
     {
-        playerCollisions = GetComponent<PlayerCollisions>();
         PlayerEvents.DamageReceived += ReceivedDamage;
+        PlayerEvents.PlayerDifficulty += PlayerDifficultyChange;
 
-        Health = playerObject.health;
-        Damage = playerObject.damage;
+        playerCollisions = GetComponent<PlayerCollisions>();
+
+        Health = playerObject.health + Difficulty.Instance.playerHealth;
+        Damage = playerObject.damage + Difficulty.Instance.playerDamage;
+
+        health = Health;
+        damage = Damage;
     }
 
     private void ReceivedDamage(float amountToLose)
@@ -26,5 +34,16 @@ public class PlayerManager : Singleton<PlayerManager>
         print("Health: " + Health);
 
         if (Health <= 0) print("dead"); //Destroy(gameObject);
+    }
+
+    private void PlayerDifficultyChange()
+    {
+        Difficulty.Instance.UpdatePlayerValues();
+
+        Health += Difficulty.Instance.playerHealth;
+        Damage += Difficulty.Instance.playerDamage;
+
+        health = Health;
+        damage = Damage;
     }
 }
