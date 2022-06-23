@@ -18,3 +18,14 @@ MonoBehaviour:
   spawnRate: 0.18
   specialRoundsNumber: 4
   specialWaveLenght: 3
+  enemyHealthMultiplier: 2
+  enemyHealth: 0
+  enemyDamageMultiplier: 0.6
+  enemyDamage: 0
+  enemyCooldownMultiplier: 0.2
+  enemyCooldown: 0
+  enemyMinCooldown: 1.2
+  playerHealthMultiplier: 0.4
+  playeryHealth: 4
+  playerDamageMultiplier: 0.2
+  playerDamage: 0

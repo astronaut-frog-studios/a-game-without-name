@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f93109a6c5de24b94f4a0767b4b1f6, type: 3}
   m_Name: FollowEnemy_SO
   m_EditorClassIdentifier: 
-  health: 4
-  maxHealth: 4
+  health: 6
+  maxHealth: 6
   speed: 0.8
-  damage: 1
+  damage: 1.2
   detectRange: 5
-  attackRange: 2
+  attackRange: 1.6
   attackCooldown: 4
   animController: {fileID: 9100000, guid: db63e6c56656dea49867744170d79d8e, type: 2}
