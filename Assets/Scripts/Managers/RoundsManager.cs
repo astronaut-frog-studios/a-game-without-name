@@ -8,16 +8,13 @@ public enum RoundState
     FINISHED
 }
 
-public class RoundsManager : PersistentSingleton<RoundsManager>
+public class RoundsManager : Singleton<RoundsManager>
 {
     [SerializeField] private RoundState state = RoundState.ROUND_STARTED;
 
     [SerializeField] private float timeBetweenRounds = 10f;
     [SerializeField] private float roundCountdown;
-
-    public int getCurrentRound => saveGameManager.currentRound;
     private WavesSpawner wavesSpawner;
-
     public delegate void StartWaveHandler();
     public event StartWaveHandler StartedWave;
 
@@ -36,7 +33,6 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
     {
         AudioSystem.Instance.PlayMusic("rain");
 
-
         roundCountdown = timeBetweenRounds;
 
         wavesSpawner.WaveFinished += FinishedRound;
@@ -51,23 +47,35 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
     {
         if (state == RoundState.FINISHED)
         {
+            if (GameManager.Instance.canStartWaves)
+            {
+                gameManager.DestroyLevel(gameManager.getCurrentRound);
+                return;
+            }
+
             roundCountdown = timeBetweenRounds;
             state = RoundState.ROUND_STARTED;
 
             return;
         }
 
-        if (state == RoundState.WAVES_STARTED) return;
+        if (state is RoundState.WAVES_STARTED) return;
 
         if (roundCountdown <= 0)
         {
             AudioSystem.Instance.StopPlaying("safe-area");
             // tocar a musica da fase
 
-            saveGameManager.displayRound.gameObject.SetActive(true);
+            if (!GameManager.Instance.canStartWaves)
+            {
+                TurnLightsOff?.Invoke();
+                gameManager.LoadLevel(gameManager.getCurrentRound);
+                return;
+            }
 
-            TurnLightsOff?.Invoke();
+            gameManager.displayRound.gameObject.SetActive(true);
             StartedWave?.Invoke();
+
             state = RoundState.WAVES_STARTED;
 
             return;
@@ -75,13 +83,18 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
 
         if (state == RoundState.ROUND_STARTED)
         {
-            saveGameManager.currentRound++;
-            saveGameManager.displayRound.text = getCurrentRound.ToString();
+            gameManager.SetCurrentRound();
+            if (gameManager.getCurrentRound > LevelDesigns.Instance.getMaxRounds)
+            {
+                gameManager.displayRound.gameObject.SetActive(false);
+                gameManager.OnGameEnded();
+                return;
+            }
 
             AudioSystem.Instance.PlayMusic("safe-area");
             TurnLightsOn?.Invoke();
 
-            if (saveGameManager.currentRound > 1)
+            if (gameManager.getCurrentRound > 1)
             {
                 PlayerEvents.OnPlayerDifficultyChange();
                 Difficulty.OnEnemyDifficultyChange();
@@ -92,11 +105,11 @@ public class RoundsManager : PersistentSingleton<RoundsManager>
 
         roundCountdown -= Time.deltaTime;
         print("SafeZone time");
-        saveGameManager.displayRound.gameObject.SetActive(false);
+        gameManager.displayRound.gameObject.SetActive(false);
         // está entre os rounds, safe zone. Falar com npcs, comprar coisas e tudo mais
     }
 
     private void FinishedRound() => state = RoundState.FINISHED;
 
-    private SaveGameManager saveGameManager => SaveGameManager.Instance;
+    private GameManager gameManager => GameManager.Instance;
 }

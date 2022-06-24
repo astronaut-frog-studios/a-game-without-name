@@ -74,11 +74,11 @@ public class WavesSpawner : MonoBehaviour
         }
     }
 
-    private bool isSpecialRound() => RoundsManager.Instance.getCurrentRound % Difficulty.Instance.specialRoundsNumber == 0;
+    private bool isSpecialRound() => GameManager.Instance.getCurrentRound % Difficulty.Instance.specialRoundsNumber == 0;
 
     private void StartSpawning()
     {
-        if (RoundsManager.Instance.getCurrentRound != 1)
+        if (GameManager.Instance.getCurrentRound != 1)
         {
             waveSpawnerHelpers.UpdateWaves();
             waves.AddRange(waveSpawnerHelpers.baseWavesList);

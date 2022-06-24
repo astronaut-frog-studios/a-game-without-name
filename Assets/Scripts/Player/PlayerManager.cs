@@ -30,10 +30,15 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         playerCollisions.DamageReceived();
         Health -= amountToLose;
+        health = Health;
 
         print("Health: " + Health);
 
-        if (Health <= 0) print("dead"); //Destroy(gameObject);
+        if (Health <= 0)
+        {
+            GameManager.Instance.OnGameEnded(false);
+            //Destroy(gameObject);
+        }
     }
 
     private void PlayerDifficultyChange()
