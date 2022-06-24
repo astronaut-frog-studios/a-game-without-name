@@ -68,11 +68,11 @@ public class RoundsManager : Singleton<RoundsManager>
 
             if (!GameManager.Instance.canStartWaves)
             {
-                TurnLightsOff?.Invoke();
                 gameManager.LoadLevel(gameManager.getCurrentRound);
                 return;
             }
 
+            TurnLightsOff?.Invoke();
             gameManager.displayRound.gameObject.SetActive(true);
             StartedWave?.Invoke();
 
