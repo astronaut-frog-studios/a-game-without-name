@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class LightsManager : PersistentSingleton<LightsManager>
+public class LightsManager : Singleton<LightsManager>
 {
     [SerializeField] private Light2D globalLight;
     [SerializeField] private float globalLightOn = 2f;
     [SerializeField] private float globalLightOff = 0.7f;
-    
+
     [SerializeField] private Color globalLightColorInitial;
     [SerializeField] private Color globalLightColorWaves;
 
@@ -27,7 +27,7 @@ public class LightsManager : PersistentSingleton<LightsManager>
     {
         ChangeFlickerLights?.Invoke(false, false);
         TurnOnPlayerLights?.Invoke(false);
-        
+
         globalLight.intensity = globalLightOn;
         globalLight.color = globalLightColorInitial;
     }

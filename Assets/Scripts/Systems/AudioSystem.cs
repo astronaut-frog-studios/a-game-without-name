@@ -12,11 +12,11 @@ public class Sound
 
     [Range(0f, 1f)] public float volume;
     [Range(.1f, 3f)] public float pitch;
-    
+
     [HideInInspector] public AudioSource source;
 }
 
-public class AudioSystem : PersistentSingleton<AudioSystem>
+public class AudioSystem : Singleton<AudioSystem>
 {
     [SerializeField] private Sound[] sounds;
 

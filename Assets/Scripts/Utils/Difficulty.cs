@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Difficulty : PersistentSingleton<Difficulty>
+public class Difficulty : Singleton<Difficulty>
 {
     [SerializeField] private DifficultyObject difficultyObject;
 
