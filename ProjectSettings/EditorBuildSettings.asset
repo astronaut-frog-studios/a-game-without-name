@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MurilinTest 2.unity
-    guid: d34f38cf02e56714aa14b42120b47eda
+    path: Assets/Scenes/MainMenu.unity
+    guid: 93b966bb449d4274ab5bd899f1288cdd
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 191dac56e4742ac4296656cc2e7224f7
   m_configObjects: {}
