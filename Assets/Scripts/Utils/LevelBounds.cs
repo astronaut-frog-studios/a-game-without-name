@@ -28,7 +28,7 @@ public class LevelBounds : StaticInstance<LevelBounds>
         minBounds = spawnArea.bounds.min;
     }
 
-    public static float RandomPosX => Random.Range(LevelBounds.minBoundsX, LevelBounds.maxBoundsX);
-    public static float RandomPosY => Random.Range(LevelBounds.minBoundsY, LevelBounds.maxBoundsY);
+    public static float RandomPosX => Random.Range(minBoundsX, maxBoundsX);
+    public static float RandomPosY => Random.Range(minBoundsY, maxBoundsY);
 
 }

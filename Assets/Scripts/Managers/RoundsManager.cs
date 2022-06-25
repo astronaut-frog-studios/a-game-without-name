@@ -73,8 +73,8 @@ public class RoundsManager : Singleton<RoundsManager>
             }
 
             TurnLightsOff?.Invoke();
-            gameManager.displayRound.gameObject.SetActive(true);
             StartedWave?.Invoke();
+            gameManager.displayRound.gameObject.SetActive(true);
 
             state = RoundState.WAVES_STARTED;
 

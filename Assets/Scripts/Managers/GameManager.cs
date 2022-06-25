@@ -48,12 +48,15 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(CallLoadingScreen(true));
 
         levelDesigns.Levels[currentRound].SetActive(true);
+        levelDesigns.SetActiveEnemySpawn(currentRound, true);
+        levelDesigns.SetCameraConfiner(currentRound);
+
         player.position = levelDesigns.GetPlayerSpawn(currentRound);
     }
 
     public void DestroyLevel(int currentRound)
     {
-        levelDesigns.DestroyEnemySpawn(currentRound);
+        levelDesigns.SetActiveEnemySpawn(currentRound, false);
         levelDesigns.Levels[currentRound].SetActive(false);
 
         LoadSafeZone();
@@ -62,6 +65,8 @@ public class GameManager : Singleton<GameManager>
     public void LoadSafeZone()
     {
         StartCoroutine(CallLoadingScreen(false));
+
+        levelDesigns.SetCameraConfiner();
         player.position = levelDesigns.GetPlayerSpawn();
     }
 
@@ -70,10 +75,12 @@ public class GameManager : Singleton<GameManager>
         transitionPanel.SetActive(true);
         var animationLength = transitionPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
 
-        yield return new WaitForSeconds(animationLength);
-
-        transitionPanel.SetActive(false);
+        yield return new WaitForSeconds(animationLength * 0.7f);
         canStartWaves = startWaves;
+
+        yield return new WaitForSeconds(animationLength);
+        transitionPanel.SetActive(false);
+
     }
     #endregion
 }
