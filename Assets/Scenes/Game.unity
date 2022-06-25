@@ -1301,7 +1301,7 @@ Camera:
   far clip plane: 1000
   field of view: 40
   orthographic: 1
-  orthographic size: 3.4
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1614,7 +1614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
-  timeBetweenRounds: 10
+  timeBetweenRounds: 4
   roundCountdown: 0
 --- !u!4 &836307103
 Transform:
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_Follow: {fileID: 845274522}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 3.4
+    OrthographicSize: 4
     NearClipPlane: 0.01
     FarClipPlane: 1000
     Dutch: 0
@@ -7836,7 +7836,7 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.146
+  m_DeadZoneWidth: 0.06
   m_DeadZoneHeight: 0.208
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
@@ -8520,12 +8520,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 60.17478, y: 7.994665}
+    - - {x: 69.93625, y: 7.994665}
       - {x: 0.015421867, y: 7.647958}
       - {x: -0.077602446, y: 0.50311804}
       - {x: 0.043043733, y: -4.1892323}
       - {x: 3.644876, y: -4.108733}
-      - {x: 60.333992, y: -4.262635}
+      - {x: 69.947556, y: -4.1886854}
 --- !u!1 &2056705471
 GameObject:
   m_ObjectHideFlags: 0
@@ -9154,6 +9154,10 @@ PrefabInstance:
     - target: {fileID: 7039043350667713871, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039043352041249774, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7039043352559011745, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
       propertyPath: m_Enabled
