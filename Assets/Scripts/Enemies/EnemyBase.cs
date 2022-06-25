@@ -43,7 +43,7 @@ public abstract class EnemyBase : MonoBehaviour
         attackCooldown = 0 - Difficulty.Instance.enemyCooldown;
 
         OnHealthChange(health);
-        PlayerEvents.PlayerHided += PlayerIsHiding;
+        PlayerEvents.PlayerHid += PlayerIsHiding;
         Difficulty.EnemyDifficulty += ChangeEnemyDifficulty;
     }
 
@@ -51,6 +51,11 @@ public abstract class EnemyBase : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         attackCooldown = 0;
+    }
+
+    void OnDestroy()
+    {
+        PlayerEvents.PlayerHid -= PlayerIsHiding;
     }
 
     private void ReceivedDamage(float amountToLose)
@@ -73,7 +78,8 @@ public abstract class EnemyBase : MonoBehaviour
         if (!playerIsHidingEventCalled) return;
 
         var rayHit2D = Physics2D.Raycast(transform.position, target.position - transform.position, enemy.detectRange, layersToDetect);
-        if (rayHit2D.transform)
+
+        if (rayHit2D)
         {
             if (!(rayHit2D.transform.CompareTag("Player")))
             {

@@ -9,8 +9,8 @@ public static class PlayerEvents
     public static event UnityAction<bool> EnemyDetected;
     public static void OnEnemyDetected(bool enemyIsGhost) => EnemyDetected?.Invoke(enemyIsGhost);
 
-    public static event UnityAction<bool> PlayerHided;
-    public static void OnPlayerHided(bool isHiding) => PlayerHided?.Invoke(isHiding);
+    public static event UnityAction<bool> PlayerHid;
+    public static void OnPlayerHid(bool isHiding) => PlayerHid?.Invoke(isHiding);
 
     public static event UnityAction PlayerDifficulty;
     public static void OnPlayerDifficultyChange() => PlayerDifficulty?.Invoke();

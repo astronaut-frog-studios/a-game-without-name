@@ -29,13 +29,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (isPlayerHiding)
         {
-            PlayerEvents.OnPlayerHided(true);
+            PlayerEvents.OnPlayerHid(true);
             return;
         }
 
         if (playerStoppedHiding)
         {
-            PlayerEvents.OnPlayerHided(false);
+            PlayerEvents.OnPlayerHid(false);
         }
     }
 
