@@ -3,12 +3,22 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+internal enum GameState
+{
+    WAITING,
+    STARTED,
+    ENDED,
+}
+
 public class GameManager : Singleton<GameManager>
 {
+    public static bool historyMode = true;
+
+    [SerializeField]
+    private GameState state = GameState.WAITING;
+
     public bool isPaused;
     [SerializeField] private GameObject pausePanel;
-
-    public static bool historyMode = true;
     public bool canStartWaves;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject transitionPanel, winPanel, defeatPanel;
@@ -23,6 +33,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        state = GameState.STARTED;
         isPaused = false;
 
         currentRound = SaveGameManager.Instance.getSavedRound;
@@ -34,15 +45,18 @@ public class GameManager : Singleton<GameManager>
     {
         if (isPaused)
         {
-            pausePanel.SetActive(true);
-            Time.timeScale = 0;
+            if (state != GameState.ENDED)
+            {
+                pausePanel.SetActive(true);
+            }
 
             AudioSystem.Instance.MuteAll();
+            Time.timeScale = 0;
             return;
         }
 
-        AudioSystem.Instance.UnmuteAll();
         pausePanel.SetActive(false);
+        AudioSystem.Instance.UnmuteAll();
         Time.timeScale = 1;
     }
 
@@ -55,6 +69,7 @@ public class GameManager : Singleton<GameManager>
     private void EndGame(bool win)
     {
         isPaused = true;
+        state = GameState.ENDED;
 
         if (win)
         {
