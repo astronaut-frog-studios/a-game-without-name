@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool isPaused;
+    [SerializeField] private GameObject pausePanel;
+
     public static bool historyMode = true;
     public bool canStartWaves;
     [SerializeField] private Transform player;
@@ -23,6 +26,19 @@ public class GameManager : Singleton<GameManager>
         currentRound = SaveGameManager.Instance.getSavedRound;
         levelDesigns = LevelDesigns.Instance;
         GameEnded += EndGame;
+    }
+
+    private void Update()
+    {
+        if (isPaused)
+        {
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+            return;
+        }
+
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void SetCurrentRound()
