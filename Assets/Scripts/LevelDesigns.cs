@@ -15,7 +15,11 @@ public class LevelDesigns : Singleton<LevelDesigns>
         MaxRounds = Levels.Length - 1;
     }
 
-    public void SetCameraConfiner(int index = 0) => CameraConfiner.m_BoundingShape2D = LevelCameraConfiners[index];
+    public void SetCameraConfiner(int index = 0)
+    {
+        CameraConfiner.InvalidatePathCache();
+        CameraConfiner.m_BoundingShape2D = LevelCameraConfiners[index];
+    }
 
     public Vector3 GetPlayerSpawn(int index = 0)
     {

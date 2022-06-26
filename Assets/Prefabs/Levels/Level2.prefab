@@ -238,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2444446850775128870}
   - component: {fileID: 7014504887171042522}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CameraLimits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,12 +284,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 18.788033, y: 7.4141216}
-      - {x: 2.9749632, y: 7.4582996}
-      - {x: 2.9178295, y: 0.35139197}
-      - {x: 2.9894662, y: -3.962802}
-      - {x: 3.4931502, y: -4.374254}
-      - {x: 18.806763, y: -4.3685403}
+    - - {x: 20.348831, y: 7.4141226}
+      - {x: 1.5091467, y: 7.2878556}
+      - {x: 1.3497448, y: 0.6241024}
+      - {x: 1.3872933, y: -3.9968905}
+      - {x: 1.3114715, y: -4.8855863}
+      - {x: 20.086243, y: -4.7689886}
 --- !u!1 &7768476108637583969
 GameObject:
   m_ObjectHideFlags: 0
@@ -2662,7 +2662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1502643024380495068, guid: a94afcdb736be714caa100e11256b426, type: 3}
       propertyPath: m_Name
-      value: SpawnArea
+      value: SpawnArea2
       objectReference: {fileID: 0}
     - target: {fileID: 1502643024380495070, guid: a94afcdb736be714caa100e11256b426, type: 3}
       propertyPath: m_Enabled

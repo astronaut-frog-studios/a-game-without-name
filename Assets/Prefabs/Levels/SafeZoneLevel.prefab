@@ -238,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038188753}
   - component: {fileID: 2038188754}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CameraLimits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ PolygonCollider2D:
       - {x: -1.9884319, y: 0.5308112}
       - {x: -1.8954788, y: -4.272312}
       - {x: 3.644876, y: -4.1918125}
-      - {x: 27.047653, y: -4.021099}
+      - {x: 27.047653, y: -4.220495}
 --- !u!1 &4151183913607405963
 GameObject:
   m_ObjectHideFlags: 0
