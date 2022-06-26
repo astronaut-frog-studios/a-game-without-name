@@ -11,6 +11,8 @@ public class Shooting : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isPaused) return;
+
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
@@ -22,7 +24,7 @@ public class Shooting : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
-        
+
         AudioSystem.Instance.PlaySfx("shoot");
     }
 }

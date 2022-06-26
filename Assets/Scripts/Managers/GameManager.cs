@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        isPaused = false;
+
         currentRound = SaveGameManager.Instance.getSavedRound;
         levelDesigns = LevelDesigns.Instance;
         GameEnded += EndGame;
@@ -34,9 +36,12 @@ public class GameManager : Singleton<GameManager>
         {
             pausePanel.SetActive(true);
             Time.timeScale = 0;
+
+            AudioSystem.Instance.MuteAll();
             return;
         }
 
+        AudioSystem.Instance.UnmuteAll();
         pausePanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -49,6 +54,8 @@ public class GameManager : Singleton<GameManager>
 
     private void EndGame(bool win)
     {
+        isPaused = true;
+
         if (win)
         {
             winPanel.SetActive(true);

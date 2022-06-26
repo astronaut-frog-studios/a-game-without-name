@@ -18,6 +18,9 @@ public class PlayerCollisions : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isPaused) return;
+
+
         var rayHit2DFront = Physics2D.OverlapCircle(playerFront.position, 1.0f, enemyLayer);
         var rayHit2DBack = Physics2D.OverlapCircle(playerBack.position, 1.0f, enemyLayer);
 
