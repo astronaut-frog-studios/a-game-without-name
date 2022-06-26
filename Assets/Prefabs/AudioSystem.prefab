@@ -43,33 +43,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80874886c3c46f748a45914669e344e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterAudioMixer: {fileID: 24300002, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
   sounds:
   - name: safe-area
     clip: {fileID: 8300000, guid: aae70e69bd204bc43859944331b57ef5, type: 3}
+    audioMixer: {fileID: -5918630248079878735, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     loop: 1
     volume: 0.085
     pitch: 1
     source: {fileID: 0}
   - name: rain
     clip: {fileID: 8300000, guid: 72a6edc9459013144a10ef25395a47bd, type: 3}
+    audioMixer: {fileID: -5918630248079878735, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     loop: 1
     volume: 0.1
     pitch: 1
     source: {fileID: 0}
   - name: explode
     clip: {fileID: 8300000, guid: e527e8ec0c31cf34ebeb605e219c8c83, type: 3}
+    audioMixer: {fileID: 1373618743100137987, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     loop: 0
     volume: 0.187
     pitch: 1
     source: {fileID: 0}
   - name: foot
     clip: {fileID: 8300000, guid: dd806ae2ad3171b4f8d6db6cfd6be886, type: 3}
+    audioMixer: {fileID: 1373618743100137987, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     loop: 1
     volume: 0.769
     pitch: 0.98
     source: {fileID: 0}
   - name: shoot
     clip: {fileID: 8300000, guid: 11792a989a39f984eb981e90fd264535, type: 3}
+    audioMixer: {fileID: 1373618743100137987, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     loop: 0
     volume: 0.882
     pitch: 0.954

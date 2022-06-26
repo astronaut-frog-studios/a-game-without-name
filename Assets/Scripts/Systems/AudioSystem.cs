@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 
 
@@ -8,6 +9,7 @@ public class Sound
 {
     public string name;
     public AudioClip clip;
+    public AudioMixerGroup audioMixer;
     public bool loop;
 
     [Range(0f, 1f)] public float volume;
@@ -18,6 +20,8 @@ public class Sound
 
 public class AudioSystem : Singleton<AudioSystem>
 {
+    [SerializeField] private AudioMixerGroup masterAudioMixer;
+
     [SerializeField] private Sound[] sounds;
 
     public readonly Dictionary<string, Sound> soundSources = new Dictionary<string, Sound>();
@@ -34,6 +38,7 @@ public class AudioSystem : Singleton<AudioSystem>
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
+            sound.source.outputAudioMixerGroup = sound.audioMixer;
 
             soundSources.Add(sound.name, sound);
         }
@@ -58,5 +63,15 @@ public class AudioSystem : Singleton<AudioSystem>
         var sound = soundSources[clipName];
 
         sound?.source.Stop();
+    }
+
+    public void MuteAll()
+    {
+        masterAudioMixer.audioMixer.SetFloat("MasterVolume", Mathf.Log10(0.0001f) * 20);
+    }
+
+    public void UnmuteAll()
+    {
+        masterAudioMixer.audioMixer.SetFloat("MasterVolume", Mathf.Log10(0f) * 20);
     }
 }
