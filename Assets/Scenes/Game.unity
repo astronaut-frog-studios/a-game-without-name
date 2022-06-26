@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Aperte ESC para voltar ao jogo...
+  m_Text: Press ESC to continue playing...
 --- !u!222 &25724561
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9384,6 +9384,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8294409345172540634, guid: b5012c935c1d35a4f8156fc5cb3f49e6, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24300002, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     - target: {fileID: 8294409345172540635, guid: b5012c935c1d35a4f8156fc5cb3f49e6, type: 3}
       propertyPath: m_RootOrder
       value: 6
