@@ -62,12 +62,10 @@ public abstract class EnemyBase : MonoBehaviour
     {
         health -= amountToLose;
         takenDamage = health < maxHealth;
-
         OnHealthChange(health);
 
         if (health > 0) return;
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        enemyAnim.SetTrigger(Explode);
+
         StartCoroutine(TimerToDestroy());
     }
 
@@ -117,6 +115,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     private IEnumerator TimerToDestroy()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
+        enemyAnim.SetTrigger(Explode);
+
         yield return new WaitForSeconds(0.12f);
 
         AudioSystem.Instance.PlaySfx("explode");
@@ -133,5 +134,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected void StopEnemy() => rigidbody.velocity = Vector2.zero;
     protected bool closerToPlayer => target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
     protected bool inCooldown => attackCooldown > 0;
+    protected bool hasCollision => GetComponent<BoxCollider2D>().enabled;
     #endregion
 }

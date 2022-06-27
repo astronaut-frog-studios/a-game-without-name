@@ -51,6 +51,8 @@ public class WalkEnemy : EnemyBase
         {
             StopEnemy();
 
+            if (!hasCollision) return;
+
             // attack animation
             PlayerEvents.OnDamageReceived(enemy.damage);
             attackCooldown = enemy.attackCooldown;

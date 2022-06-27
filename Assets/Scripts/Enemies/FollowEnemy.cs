@@ -16,7 +16,7 @@ public class FollowEnemy : EnemyBase
         {
             StopEnemy();
 
-            if (inCooldown) return;
+            if (inCooldown || !hasCollision) return;
 
             PlayerEvents.OnDamageReceived(enemy.damage);
             attackCooldown = enemy.attackCooldown;

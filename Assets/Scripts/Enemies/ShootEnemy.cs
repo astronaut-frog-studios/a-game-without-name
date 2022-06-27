@@ -143,6 +143,6 @@ public class ShootEnemy : EnemyBase
     private bool preparingAttack => state is ShootEnemyState.PREPARING_ATTACK && inCooldown;
     private bool canCheckBulletCollision => state is ShootEnemyState.SHOOTING && bullet;
     private bool bulletHasCollide => bullet &&
-                                     Physics2D.OverlapCircle(bullet.transform.position, 0.4f,
+                                     Physics2D.OverlapCircle(bullet.transform.position, 0.3f,
                                          LayerMask.NameToLayer("PlayerTrigger"));
 }
