@@ -7,7 +7,7 @@ public class WaveSpawnerHelpers
     public readonly List<Wave> baseWavesList = new List<Wave>();
 
     private List<GameObject> normalEnemies() =>
-        EnemyTypes.Instance.enemies.Where(enemy => enemy.name != "Enemy4").ToList();
+        EnemyTypes.Instance.enemies.Where(enemy => enemy.name != "Enemy2_33").ToList();
 
     private List<GameObject> GetRandomNormalEnemies(int to, int numberOfEnemies, int from = 0)
     {
@@ -22,8 +22,8 @@ public class WaveSpawnerHelpers
     {
         var randomEnemies = GetRandomNormalEnemies(normalEnemies().Count, Difficulty.Instance.specialWaveLenght - 1);
 
-        var enemyHorde = Helpers.FindInArrayByName(EnemyTypes.Instance.enemies, "Enemy4");
-        randomEnemies.Add(enemyHorde);
+        var enemyLmg = Helpers.FindInArrayByName(EnemyTypes.Instance.enemies, "Enemy2_33");
+        randomEnemies.Add(enemyLmg);
 
         return new Wave("4", randomEnemies.ToArray(),
             20 + Difficulty.Instance.numberOfEnemiesMultiplier,
@@ -32,7 +32,7 @@ public class WaveSpawnerHelpers
 
     public IEnumerable<Wave> CreateBaseWaves()
     {
-        for (var i = 0; i < EnemyTypes.Instance.enemies.Length - 1; i++)
+        for (var i = 0; i < 3; i++)
         {
             var enemies = enemiesArray(i);
 
@@ -65,8 +65,8 @@ public class WaveSpawnerHelpers
     {
         return index switch
         {
-            0 => new[] { EnemyTypes.Instance.enemies[index] },
-            1 => new[] { EnemyTypes.Instance.enemies[0], GetRandomNormalEnemies(3, 1, from: 1).First() },
+            0 => new[] { EnemyTypes.Instance.enemies[index], GetRandomNormalEnemies(EnemyTypes.Instance.enemies.Length - 2, 1, from: 1).First() },
+            1 => new[] { EnemyTypes.Instance.enemies[0], GetRandomNormalEnemies(EnemyTypes.Instance.enemies.Length - 2, 1, from: 1).First(), GetRandomNormalEnemies(EnemyTypes.Instance.enemies.Length - 1, 1, from: 1).First() },
             _ => normalEnemies().ToArray()
         };
     }
