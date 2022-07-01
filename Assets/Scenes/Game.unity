@@ -391,8 +391,9 @@ MonoBehaviour:
   enemies:
   - {fileID: 7016307679373651356, guid: 3807de788686d4b40abb8e49f2dc1732, type: 3}
   - {fileID: 7016307679373651356, guid: 94cb7db8ae818f443b11ed30c5537277, type: 3}
+  - {fileID: 7016307679373651356, guid: 3231c56767621d34384e219077699a52, type: 3}
   - {fileID: 7016307679373651356, guid: 171c451024e203246bc7da5f9bbb08b9, type: 3}
-  - {fileID: 7016307679373651356, guid: 5dba4f5548189a841883bf31473ba36e, type: 3}
+  - {fileID: 7016307679373651356, guid: 94efb97d30b7eb343b00e1511f934b3b, type: 3}
 --- !u!4 &159657126
 Transform:
   m_ObjectHideFlags: 0
@@ -1712,7 +1713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96e919e4a83b15488dce4abb03e9d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyObject: {fileID: 11400000, guid: 2d53d3cf83efe4a4d9c11d2a5def95ea, type: 2}
+  difficultyObject: {fileID: 11400000, guid: a6e3275aeb59f4c48a5c2ac993513d6b, type: 2}
   numberOfEnemiesMultiplier: 0
   numberOfEnemies: 0
   specialRoundsNumber: 0
@@ -1725,6 +1726,10 @@ MonoBehaviour:
   enemyDamage: 0
   enemyCooldownMultiplier: 0
   enemyCooldown: 0
+  enemyBulletSpeedMultiplier: 0.2
+  enemyBulletSpeed: 0
+  enemyNumberOfBulletsMultiplier: 1
+  enemyNumberOfBullets: 1
   playerHealthMultiplier: 0
   playerHealth: 0
   playerDamageMultiplier: 0
@@ -2098,9 +2103,9 @@ MonoBehaviour:
   - {fileID: 1512600335}
   spawnRadius: 5
   waves: []
-  timeBetweenWaves: 2.4
+  timeBetweenWaves: 2
   waveCountdown: 0
-  enemySearchTime: 1.5
+  enemySearchTime: 0.9
 --- !u!4 &1136419765
 Transform:
   m_ObjectHideFlags: 0
@@ -9303,6 +9308,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2223434278915702266, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
+      propertyPath: pushBackForce
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 7039043350667713865, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -9351,9 +9360,17 @@ PrefabInstance:
       propertyPath: filmadora
       value: 
       objectReference: {fileID: 692607044}
+    - target: {fileID: 7039043350667713867, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7039043350667713871, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039043352582964912, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684a57311637e7e40aaea7dbd480cd11, type: 3}
