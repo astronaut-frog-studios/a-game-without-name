@@ -8,6 +8,7 @@ internal enum GameState
     WAITING,
     STARTED,
     ENDED,
+    TESTING
 }
 
 public class GameManager : Singleton<GameManager>
@@ -43,6 +44,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
+        if (state is GameState.TESTING) return;
+
         if (isPaused)
         {
             if (state != GameState.ENDED)
