@@ -20,7 +20,7 @@ TagManager:
   - Background
   - EnemyBullet
   - NoCollision
-  - 
+  - PlayerPhysics
   - 
   - 
   - 
