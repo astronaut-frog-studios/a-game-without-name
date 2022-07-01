@@ -70,7 +70,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: dd806ae2ad3171b4f8d6db6cfd6be886, type: 3}
     audioMixer: {fileID: 1373618743100137987, guid: d18b7be860359224f93f878eb5badcf4, type: 2}
     loop: 1
-    volume: 0.769
+    volume: 0.24
     pitch: 0.98
     source: {fileID: 0}
   - name: shoot
