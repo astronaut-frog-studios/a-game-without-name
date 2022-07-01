@@ -20,6 +20,10 @@ public class Difficulty : Singleton<Difficulty>
     [ReadOnly, SerializeField] public float enemyDamage;
     [HideInInspector] public float enemyCooldownMultiplier;
     [ReadOnly, SerializeField] public float enemyCooldown;
+    [HideInInspector] public float enemyBulletSpeedMultiplier = 0.2f;
+    [ReadOnly, SerializeField] public float enemyBulletSpeed = 0;
+    [HideInInspector] public int enemyNumberOfBulletsMultiplier = 1;
+    [ReadOnly, SerializeField] public int enemyNumberOfBullets = 1;
 
     [Header("Player")]
     [HideInInspector] public float playerHealthMultiplier;
@@ -75,6 +79,11 @@ public class Difficulty : Singleton<Difficulty>
         enemyHealth = difficultyObject.enemyHealth;
         enemyCooldownMultiplier = difficultyObject.enemyCooldownMultiplier;
         enemyCooldown = difficultyObject.enemyCooldown;
+
+        enemyBulletSpeedMultiplier = difficultyObject.enemyBulletSpeedMultiplier;
+        enemyBulletSpeed = difficultyObject.enemyBulletSpeed;
+        enemyNumberOfBulletsMultiplier = difficultyObject.enemyNumberOfBulletsMultiplier;
+        enemyNumberOfBullets = difficultyObject.enemyNumberOfBullets;
     }
 
     private void SetPlayer()
@@ -96,6 +105,8 @@ public class Difficulty : Singleton<Difficulty>
         enemyHealth += enemyHealthMultiplier;
         enemyDamage += enemyDamageMultiplier;
         enemyCooldown -= enemyCooldownMultiplier;
+        enemyBulletSpeed += enemyBulletSpeedMultiplier;
+        enemyNumberOfBullets += enemyNumberOfBulletsMultiplier;
     }
 
     public void OnSave()
@@ -111,6 +122,10 @@ public class Difficulty : Singleton<Difficulty>
         difficultyObject.enemyHealth = enemyHealth;
         difficultyObject.enemyCooldownMultiplier = enemyCooldownMultiplier;
         difficultyObject.enemyCooldown = enemyCooldown;
+        difficultyObject.enemyBulletSpeedMultiplier = enemyBulletSpeedMultiplier;
+        difficultyObject.enemyBulletSpeed = enemyBulletSpeed;
+        difficultyObject.enemyNumberOfBulletsMultiplier = enemyNumberOfBulletsMultiplier;
+        difficultyObject.enemyNumberOfBullets = enemyNumberOfBullets;
 
         difficultyObject.playerHealthMultiplier = playerHealthMultiplier;
         difficultyObject.playeryHealth = playerHealth;

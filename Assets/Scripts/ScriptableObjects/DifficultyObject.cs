@@ -18,7 +18,10 @@ public class DifficultyObject : ScriptableObject
     public float enemyDamage = 0;
     public float enemyCooldownMultiplier = 0.2f;
     public float enemyCooldown = 0;
-    public float enemyMinCooldown = 1.2f;
+    public float enemyBulletSpeedMultiplier = 0.4f;
+    public float enemyBulletSpeed = 0;
+    public int enemyNumberOfBulletsMultiplier = 1;
+    public int enemyNumberOfBullets = 1;
 
     [Header("Player")]
     public float playerHealthMultiplier = 0.4f;
