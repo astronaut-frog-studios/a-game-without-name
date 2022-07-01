@@ -229,7 +229,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: c86468a559ca2b54c8084aa1e054f853, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de346a337cbf9df45a9feb86cd26717f, type: 3}
   m_Color: {r: 0.92896307, g: 0.042452812, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -257,7 +257,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.7524999, y: 2.9370866}
+    oldSize: {x: 1.81, y: 2.0875}
     newSize: {x: 2.0685713, y: 2.3857143}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -378,8 +378,9 @@ MonoBehaviour:
   enemyOpacity: {fileID: 11400000, guid: f770a02634f7e71479b9823a43db5406, type: 2}
   enemy: {fileID: 11400000, guid: 4a10637d20169b24fa89a85ae475e22a, type: 2}
   health: 0
-  attackCooldown: 0
   damage: 0
+  attackCooldown: 0
+  minCooldown: 0.25
   takenDamage: 0
   maxHealth: 0
   layersToDetect:

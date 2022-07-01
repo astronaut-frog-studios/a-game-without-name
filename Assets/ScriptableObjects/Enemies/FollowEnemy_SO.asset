@@ -18,5 +18,5 @@ MonoBehaviour:
   damage: 1.2
   detectRange: 5
   attackRange: 1.6
-  attackCooldown: 4
+  attackCooldown: 2
   animController: {fileID: 9100000, guid: db63e6c56656dea49867744170d79d8e, type: 2}
