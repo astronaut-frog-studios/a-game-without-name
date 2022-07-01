@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713bc260791b9f84bba310ea6200cf53, type: 3}
   m_Name: Difficulty_SO_1
   m_EditorClassIdentifier: 
-  numberOfEnemiesMultiplier: 2
-  numberOfEnemies: 1
+  numberOfEnemiesMultiplier: 1
+  numberOfEnemies: 0
   spawnRateMultiplier: 0.024
   spawnRate: 0.18
   specialRoundsNumber: 4
