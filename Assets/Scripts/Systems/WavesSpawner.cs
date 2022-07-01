@@ -84,10 +84,10 @@ public class WavesSpawner : MonoBehaviour
             waves.AddRange(waveSpawnerHelpers.baseWavesList);
         }
 
-        if (isSpecialRound())
-        {
-            waves.Add(waveSpawnerHelpers.CreateSpecialWave());
-        }
+        // if (isSpecialRound())
+        // {
+        //     waves.Add(waveSpawnerHelpers.CreateSpecialWave());
+        // }
 
         state = WaveState.COUNTING;
     }
