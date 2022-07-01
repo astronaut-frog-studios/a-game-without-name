@@ -10,10 +10,14 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] private float health;
     [SerializeField] private float damage;
 
+    private PlayerMeleeCollision playerCollision;
+
     private void Start()
     {
         PlayerEvents.DamageReceived += ReceivedDamage;
         PlayerEvents.PlayerDifficulty += PlayerDifficultyChange;
+
+        playerCollision = GetComponent<PlayerMeleeCollision>();
 
         Health = playerObject.health + Difficulty.Instance.playerHealth;
         Damage = playerObject.damage + Difficulty.Instance.playerDamage;
@@ -24,6 +28,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void ReceivedDamage(float amountToLose)
     {
+        playerCollision.DamageReceived();
         Health -= amountToLose;
         health = Health;
 
