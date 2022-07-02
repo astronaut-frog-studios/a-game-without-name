@@ -18,8 +18,8 @@ public class PlayerMeleeCollision : MonoBehaviour
     {
         if (GameManager.Instance.isPaused) return;
 
-        var rayHit2DFront = Physics2D.OverlapCircle(playerFront.position, 1.0f, enemyLayer);
-        var rayHit2DBack = Physics2D.OverlapCircle(playerBack.position, 1.0f, enemyLayer);
+        var rayHit2DFront = Physics2D.OverlapCircle(playerFront.position, 0.4f, enemyLayer);
+        var rayHit2DBack = Physics2D.OverlapCircle(playerBack.position, 0.4f, enemyLayer);
 
         if (rayHit2DFront)
         {
