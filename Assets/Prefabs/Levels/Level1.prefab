@@ -407,7 +407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 451967224458689517}
   - component: {fileID: 451967224458689516}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Porta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2534,7 +2534,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.001960814, y: 0.001960814, z: 0}
   m_MaxChunkCount: 16
@@ -2611,7 +2611,7 @@ GameObject:
   - component: {fileID: 4165088920001940691}
   - component: {fileID: 4843277558198273345}
   - component: {fileID: 2326616325524544812}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cadeira1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

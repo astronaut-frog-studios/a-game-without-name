@@ -137,6 +137,7 @@ MonoBehaviour:
   hittEffect: {fileID: 0}
   layersToCollide:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   autoDestroyTime: 3
   rigid: {fileID: 0}
+  collisionTag: 

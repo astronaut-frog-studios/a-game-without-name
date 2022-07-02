@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 457695894}
   - component: {fileID: 457695895}
   - component: {fileID: 7450751844771593885}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: mesa2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1218110479}
   - component: {fileID: 1218110480}
   - component: {fileID: 5035486353838966038}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sofa7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4537,7 +4537,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.001960814, y: 0.001960814, z: 0}
   m_MaxChunkCount: 16
