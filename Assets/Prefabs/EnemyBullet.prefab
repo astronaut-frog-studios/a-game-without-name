@@ -135,5 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hittEffect: {fileID: 0}
-  autoDestroyTime: 4.5
+  layersToCollide:
+    serializedVersion: 2
+    m_Bits: 4617
+  autoDestroyTime: 3.5
   rigid: {fileID: 0}
