@@ -36,6 +36,8 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (String.IsNullOrEmpty(collisionTag)) return;
+
         if (other.gameObject.CompareTag(collisionTag))
         {
             onBulletCollideCallback?.Invoke();
