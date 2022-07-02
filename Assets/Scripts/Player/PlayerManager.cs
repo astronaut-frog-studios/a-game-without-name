@@ -26,9 +26,13 @@ public class PlayerManager : Singleton<PlayerManager>
         damage = Damage;
     }
 
-    private void ReceivedDamage(float amountToLose)
+    private void ReceivedDamage(float amountToLose, bool isMelee)
     {
-        playerCollision.DamageReceived();
+        if (isMelee)
+        {
+            playerCollision.DamageReceived();
+        }
+
         Health -= amountToLose;
         health = Health;
 
