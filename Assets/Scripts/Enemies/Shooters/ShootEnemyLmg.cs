@@ -6,6 +6,7 @@ public class ShootEnemyLmg : ShootEnemyBase
 {
     [Header("LMG Gunner")]
     [SerializeField] private int numberOfBullets;
+    [SerializeField] private float radius;
 
     private List<Bullet> projectiles = new List<Bullet>();
 
@@ -51,7 +52,7 @@ public class ShootEnemyLmg : ShootEnemyBase
         base.Shoot();
         projectiles.Clear();
 
-        var angleStep = 360f / numberOfBullets;
+        var angleStep = 360f / numberOfBullets * radius;
         var angle = 0f;
 
         for (int i = 0; i < numberOfBullets; i++)
@@ -85,15 +86,7 @@ public class ShootEnemyLmg : ShootEnemyBase
                 return;
             }
 
-            var bulletCollideWithPlayer = projectile &&
-            Physics2D.OverlapCircle(projectile.transform.position, 0.3f,
-                 LayerMask.NameToLayer("PlayerTrigger"));
-
-            if (bulletCollideWithPlayer)
-            {
-                Destroy(projectile.gameObject);
-                PlayerEvents.OnDamageReceived(enemy.damage);
-            }
+            projectile.OnBulletCollide(() => PlayerEvents.OnDamageReceived(enemy.damage), "Player");
         }
     }
 

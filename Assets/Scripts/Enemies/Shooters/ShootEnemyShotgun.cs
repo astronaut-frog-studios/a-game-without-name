@@ -89,15 +89,7 @@ public class ShootEnemyShotgun : ShootEnemyBase
                 return;
             }
 
-            var bulletCollideWithPlayer = projectile &&
-            Physics2D.OverlapCircle(projectile.transform.position, 0.3f,
-                 LayerMask.NameToLayer("PlayerTrigger"));
-
-            if (bulletCollideWithPlayer)
-            {
-                Destroy(projectile.gameObject);
-                PlayerEvents.OnDamageReceived(enemy.damage);
-            }
+            projectile.OnBulletCollide(() => PlayerEvents.OnDamageReceived(enemy.damage), "Player");
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -60,15 +61,8 @@ public class ShootEnemyPistol : ShootEnemyBase
             return;
         }
 
-        if (bulletCollideWithPlayer)
-        {
-            Destroy(projectile.gameObject);
-            PlayerEvents.OnDamageReceived(enemy.damage);
-        }
+        projectile.OnBulletCollide(() => PlayerEvents.OnDamageReceived(enemy.damage), "Player");
     }
 
     private bool canCheckBulletCollision => (state is ShootEnemyBaseState.SHOOTING || state is ShootEnemyBaseState.PREPARING_ATTACK) && projectile;
-    private bool bulletCollideWithPlayer => projectile &&
-                                     Physics2D.OverlapCircle(projectile.transform.position, 0.3f,
-                                         LayerMask.NameToLayer("PlayerTrigger"));
 }
