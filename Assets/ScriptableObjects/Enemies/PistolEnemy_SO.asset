@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 6
   speed: 1.6
   damage: 2
-  detectRange: 5.5
+  detectRange: 6.5
   attackRange: 3.5
   attackCooldown: 2
   animController: {fileID: 9100000, guid: d58f8d3beb49a8b47afbdbb7433e54d9, type: 2}

@@ -440,6 +440,7 @@ MonoBehaviour:
   bulletSpeed: 4.5
   bulletPrefab: {fileID: -7109188048688935694, guid: c651d00a0805321409c2cf9bf46e2d84, type: 3}
   numberOfBullets: 8
+  radius: 2.05
 --- !u!114 &2021714399
 MonoBehaviour:
   m_ObjectHideFlags: 0
