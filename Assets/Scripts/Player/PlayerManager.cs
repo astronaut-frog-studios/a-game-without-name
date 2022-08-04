@@ -5,8 +5,11 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] private PlayerObject playerObject;
 
     public float Health { get; private set; }
+    public float MaxHealth { get; private set; }
     public float Damage { get; private set; }
 
+    [SerializeField] private PlayerHealthUI healthBar;
+    [SerializeField] private PlayerAmmoUI ammoBar;
     [SerializeField] private float health;
     [SerializeField] private float damage;
 
@@ -17,11 +20,15 @@ public class PlayerManager : Singleton<PlayerManager>
         PlayerEvents.DamageReceived += ReceivedDamage;
         PlayerEvents.PlayerDifficulty += PlayerDifficultyChange;
 
+        healthBar = GetComponent<PlayerHealthUI>();
+        ammoBar = GetComponent<PlayerAmmoUI>();
         playerCollision = GetComponent<PlayerMeleeCollision>();
 
         Health = playerObject.health + Difficulty.Instance.playerHealth;
+        MaxHealth = playerObject.maxHealth + Difficulty.Instance.playerMaxHealth;
         Damage = playerObject.damage + Difficulty.Instance.playerDamage;
 
+        healthBar.OnHealthChange(Health);
         health = Health;
         damage = Damage;
     }
@@ -35,13 +42,11 @@ public class PlayerManager : Singleton<PlayerManager>
 
         Health -= amountToLose;
         health = Health;
-
-        print("Health: " + Health);
-
-        if (Health <= 0)
+        healthBar.OnHealthChange(Health);
+        
+        if (Health <= 0.2f)
         {
             GameManager.Instance.OnGameEnded(false);
-            //Destroy(gameObject);
         }
     }
 
