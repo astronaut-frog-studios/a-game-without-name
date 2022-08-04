@@ -29,6 +29,7 @@ MonoBehaviour:
   enemyNumberOfBulletsMultiplier: 2
   enemyNumberOfBullets: 5
   playerHealthMultiplier: 0.4
-  playeryHealth: 4.6
+  playeryHealth: 0
+  playeryMaxHealth: 0
   playerDamageMultiplier: 0.2
   playerDamage: 0
