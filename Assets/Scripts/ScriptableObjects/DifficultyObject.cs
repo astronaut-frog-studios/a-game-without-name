@@ -26,6 +26,7 @@ public class DifficultyObject : ScriptableObject
     [Header("Player")]
     public float playerHealthMultiplier = 0.4f;
     public float playeryHealth = 0;
+    public float playeryMaxHealth = 0;
     public float playerDamageMultiplier = 0.2f;
     public float playerDamage = 0;
 }

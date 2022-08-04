@@ -28,6 +28,7 @@ public class Difficulty : Singleton<Difficulty>
     [Header("Player")]
     [HideInInspector] public float playerHealthMultiplier;
     [ReadOnly, SerializeField] public float playerHealth;
+    [ReadOnly, SerializeField] public float playerMaxHealth;
     [HideInInspector] public float playerDamageMultiplier;
     [ReadOnly, SerializeField] public float playerDamage;
 
@@ -90,6 +91,7 @@ public class Difficulty : Singleton<Difficulty>
     {
         playerHealthMultiplier = difficultyObject.playerHealthMultiplier;
         playerHealth = difficultyObject.playeryHealth;
+        playerMaxHealth = difficultyObject.playeryMaxHealth;
         playerDamageMultiplier = difficultyObject.playerDamageMultiplier;
         playerDamage = difficultyObject.playerDamage;
     }
@@ -97,6 +99,7 @@ public class Difficulty : Singleton<Difficulty>
     public void UpdatePlayerValues()
     {
         playerHealth += playerHealthMultiplier;
+        playerMaxHealth += playerHealthMultiplier;
         playerDamage += playerDamageMultiplier;
     }
 
