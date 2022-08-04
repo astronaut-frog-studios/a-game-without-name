@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthUI : MonoBehaviour
+public class EnemyHealthUI : MonoBehaviour
 {
     [SerializeField] private Color low;
     [SerializeField] private Color high;
@@ -23,8 +23,8 @@ public class HealthUI : MonoBehaviour
         }
     
         healthSlider.gameObject.SetActive(enemyPros.takenDamage);
-        healthSlider.value = amount;
         healthSlider.maxValue = enemyPros.maxHealth;
+        healthSlider.value = amount;
     
         healthSlider.fillRect.GetComponentInChildren<Image>().color =
             Color.Lerp(low, high, healthSlider.normalizedValue);

@@ -10,9 +10,9 @@ public class ShootEnemyLmg : ShootEnemyBase
 
     private List<Bullet> projectiles = new List<Bullet>();
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         bulletSpeed = (Difficulty.Instance.enemyBulletSpeed - 0.8f);
         numberOfBullets = (Difficulty.Instance.enemyNumberOfBullets + 4);
     }

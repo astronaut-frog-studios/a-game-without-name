@@ -1,24 +1,29 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [Header("Common Variables")]
-    [SerializeField] private EnemyOpacityObject enemyOpacity;
+    [Header("Common Variables")] [SerializeField]
+    private EnemyOpacityObject enemyOpacity;
+
     [SerializeField] protected EnemyObject enemy;
     [ReadOnly, SerializeField] protected float health;
     [ReadOnly, SerializeField] protected float damage;
-    [Header("Cooldowns")]
-    [ReadOnly, SerializeField] protected float attackCooldown;
+
+    [Header("Cooldowns")] [ReadOnly, SerializeField]
+    protected float attackCooldown;
+
     [SerializeField] private float minCooldown;
     [HideInInspector] public bool takenDamage;
     [HideInInspector] public float maxHealth;
     protected new Rigidbody2D rigidbody;
     protected Transform target;
 
-    [Header("Detect Player")]
-    [SerializeField] private LayerMask layersToDetect;
+    [Header("Detect Player")] [SerializeField]
+    private LayerMask layersToDetect;
+
     [ReadOnly, SerializeField] private bool detectSneakyPlayer;
     [ReadOnly, SerializeField] private bool playerIsHidingEventCalled;
 
@@ -30,12 +35,6 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        health = enemy.health + Difficulty.Instance.enemyHealth;
-        maxHealth = enemy.maxHealth;
-        damage = enemy.damage + Difficulty.Instance.enemyDamage;
-        attackCooldown = (enemy.attackCooldown / 2) - Difficulty.Instance.enemyCooldown;
-
-        OnHealthChange(health);
         PlayerEvents.PlayerHid += PlayerIsHiding;
         Difficulty.EnemyDifficulty += ChangeEnemyDifficulty;
 
@@ -45,6 +44,16 @@ public abstract class EnemyBase : MonoBehaviour
         flickEnemy.enemyOpacity = enemyOpacity;
         enemyAnim = gameObject.GetComponent<Animator>();
         enemyAnim.runtimeAnimatorController = enemy.animController;
+    }
+
+    protected virtual void Start()
+    {
+        health = enemy.health + Difficulty.Instance.enemyHealth;
+        maxHealth = enemy.maxHealth;
+        damage = enemy.damage + Difficulty.Instance.enemyDamage;
+        attackCooldown = (enemy.attackCooldown / 2) - Difficulty.Instance.enemyCooldown;
+
+        OnHealthChange(health);
     }
 
     protected virtual void ChangeEnemyDifficulty()
@@ -77,7 +86,8 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (!playerIsHidingEventCalled) return;
 
-        var rayHit2D = Physics2D.Raycast(transform.position, target.position - transform.position, enemy.detectRange, layersToDetect);
+        var rayHit2D = Physics2D.Raycast(transform.position, target.position - transform.position, enemy.detectRange,
+            layersToDetect);
 
         if (rayHit2D)
         {
@@ -124,11 +134,18 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     #region getters
-    protected bool canDetectPlayer => Vector2.Distance(transform.position, target.position) <= enemy.detectRange && !playerIsHidingEventCalled ||
-    detectSneakyPlayer && playerIsHidingEventCalled;
+
+    protected bool canDetectPlayer => Vector2.Distance(transform.position, target.position) <= enemy.detectRange &&
+                                      !playerIsHidingEventCalled ||
+                                      detectSneakyPlayer && playerIsHidingEventCalled;
+
     protected void StopEnemy() => rigidbody.velocity = Vector2.zero;
-    protected bool closerToPlayer => target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
+
+    protected bool closerToPlayer =>
+        target && Vector2.Distance(transform.position, target.position) <= enemy.attackRange;
+
     protected bool inCooldown => attackCooldown > 0;
     protected bool hasCollision => GetComponent<BoxCollider2D>().enabled;
+
     #endregion
 }

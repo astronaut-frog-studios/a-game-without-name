@@ -6,9 +6,9 @@ public class ShootEnemyPistol : ShootEnemyBase
 {
     private Bullet projectile;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         bulletSpeed = (Difficulty.Instance.enemyBulletSpeed + 1);
     }
 
