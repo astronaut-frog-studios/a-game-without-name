@@ -427,7 +427,7 @@ MonoBehaviour:
   health: 0
   damage: 0
   attackCooldown: 0
-  minCooldown: 0.8
+  minCooldown: 0.9
   takenDamage: 0
   maxHealth: 0
   layersToDetect:
