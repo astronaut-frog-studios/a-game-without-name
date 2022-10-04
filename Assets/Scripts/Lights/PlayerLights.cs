@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerLights : MonoBehaviour
 {
