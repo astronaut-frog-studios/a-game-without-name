@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering.Universal;
 
 public class FlickerLight : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class FlickerLight : MonoBehaviour
 
     private void Start()
     {
-        light2DComponent = gameObject.GetComponent<Light2D>();
+        light2DComponent = gameObject.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
 
         LightsManager.Instance.ChangeFlickerLights += ChangeLightProperties;
     }
